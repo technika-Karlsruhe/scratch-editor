@@ -22,6 +22,13 @@ const nodeBuilder = new ScratchWebpackConfigBuilder(common)
         }
     });
 
+// Ensure node-target build doesn't try to parse binary/static assets as JS
+nodeBuilder.addModuleRule({
+    test: /\.(svg|png|wav|mp3|gif|jpg)$/,
+    resourceQuery: /^$/,
+    type: 'asset'
+});
+
 const webBuilder = new ScratchWebpackConfigBuilder(common)
     .setTarget('browserslist')
     .merge({
@@ -30,7 +37,10 @@ const webBuilder = new ScratchWebpackConfigBuilder(common)
         },
         resolve: {
             fallback: {
-                Buffer: require.resolve('buffer/')
+                Buffer: require.resolve('buffer/'),
+                stream: require.resolve('stream-browserify'),
+                util: require.resolve('util/'),
+                fs: false
             }
         },
         output: {
@@ -46,6 +56,13 @@ const webBuilder = new ScratchWebpackConfigBuilder(common)
             exposes: 'VirtualMachine'
         }
     });
+
+// Let webpack handle common static assets (SVG, images, audio) as assets
+webBuilder.addModuleRule({
+    test: /\.(svg|png|wav|mp3|gif|jpg)$/, 
+    resourceQuery: /^$/, // reject any query string
+    type: 'asset'
+});
 
 const playgroundBuilder = webBuilder
     .clone()

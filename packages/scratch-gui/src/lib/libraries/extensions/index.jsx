@@ -1,6 +1,56 @@
 import React from 'react';
 import {FormattedMessage} from 'react-intl';
 
+import btsmartIconURL from './ft/btsmart_big.png';
+import btsmartInsetIconURL from './ft/btsmart_small.png';
+import btsmartConnectionIconURL from './ft/btsmart_small.png';
+import btsmartConnectionSmallIconURL from './ft/btsmart_small.png';
+
+import btreceiverIconURL from './ft/btreceiver_big.png';
+import btreceiverInsetIconURL from './ft/btreceiver_small.png';
+import btreceiverConnectionIconURL from './ft/btreceiver_small.png';
+import btreceiverConnectionSmallIconURL from './ft/btreceiver_small.png';
+
+import txtIconURL from './ft/txt_big.png';
+import txtInsetIconURL from './ft/txt_small.png';
+import txtConnectionIconURL from './ft/txt_small.png';
+import txtConnectionSmallIconURL from './ft/txt_small.png';
+
+import robbyIconURL from './ft/robby_big.png';
+import robbyInsetIconURL from './ft/robby_small.png';
+import robbyConnectionIconURL from './ft/robby_small.png';
+import robbyConnectionSmallIconURL from './ft/robby_small.png';
+
+import txIconURL from './ft/tx_big.png';
+import txInsetIconURL from './ft/tx_small.png';
+import txConnectionIconURL from './ft/tx_small.png';
+import txConnectionSmallIconURL from './ft/tx_small.png';
+
+import txt40IconURL from './ft/txt40_big.png';
+import txt40InsetIconURL from './ft/txt40_small.png';
+import txt40ConnectionIconURL from './ft/txt40_small.png';
+import txt40ConnectionSmallIconURL from './ft/txt40_small.png';
+
+import ltIconURL from './ft/lt_big.png';
+import ltInsetIconURL from './ft/lt_small.png';
+import ltConnectionIconURL from './ft/lt_small.png';
+import ltConnectionSmallIconURL from './ft/lt_small.png';
+
+import ftduinoIconURL from './ft/ftduino_big.png';
+import ftduinoInsetIconURL from './ft/ftduino_small.png';
+import ftduinoConnectionIconURL from './ft/ftduino_small.png';
+import ftduinoConnectionSmallIconURL from './ft/ftduino_small.png';
+
+import rxIconURL from './ft/rx_big.png';
+import rxInsetIconURL from './ft/rx_small.png';
+import rxConnectionIconURL from './ft/rx_small.png';
+import rxConnectionSmallIconURL from './ft/rx_small.png';
+
+import tfIconURL from './tf/TensorFlow_big.png';
+import tfInsetIconURL from './tf/TensorFlow_small.svg';
+import tfConnectionIconURL from './tf/TensorFlow_small.svg';
+import tfConnectionSmallIconURL from './tf/TensorFlow_small.svg';
+
 import musicIconURL from './music/music.png';
 import musicInsetIconURL from './music/music-small.svg';
 
@@ -50,6 +100,306 @@ import faceSensingIconURL from './faceSensing/faceSensing.png';
 import faceSensingInsetIconURL from './faceSensing/faceSensing-small.svg';
 
 export default [
+    {
+        name: 'BT-Smart',
+        extensionId: 'btsmart',
+        collaborator: 'technika',
+        iconURL: btsmartIconURL,
+        insetIconURL: btsmartInsetIconURL,
+        description: (
+            <FormattedMessage
+                defaultMessage="Connect your projects with the bt-smart."
+                description="Description for the 'fischertechnik' extension"
+                id="gui.extension.btsmart.description"
+            />
+        ),
+        featured: true,
+        disabled: false,
+        bluetoothRequired: true,
+        internetConnectionRequired: false,
+        launchPeripheralConnectionFlow: false,
+        useAutoScan: false,
+        connectionIconURL: btsmartConnectionIconURL,
+        connectionSmallIconURL: btsmartConnectionSmallIconURL,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting"
+                description="Message to help people connect to their fischertechnik."
+                id="gui.extension.btsmart.connectingMessage"
+            />
+        ),
+        helpLink: 'https://technika-karlsruhe.github.io/'
+    },
+    {
+        name: 'BT-Receiver',
+        extensionId: 'btreceiver',
+        collaborator: 'technika',
+        iconURL: btreceiverIconURL,
+        insetIconURL: btreceiverInsetIconURL,
+        description: (
+            <FormattedMessage
+                defaultMessage="Connect your projects with the bt-receiver."
+                description="Description for the 'fischertechnik' extension"
+                id="gui.extension.btreceiver.description"
+            />
+        ),
+        featured: true,
+        disabled: false,
+        bluetoothRequired: true,
+        internetConnectionRequired: false,
+        launchPeripheralConnectionFlow: false,
+        useAutoScan: false,
+        connectionIconURL: btreceiverConnectionIconURL,
+        connectionSmallIconURL: btreceiverConnectionSmallIconURL,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting"
+                description="Message to help people connect to their fischertechnik."
+                id="gui.extension.btreceiver.connectingMessage"
+            />
+        ),
+        helpLink: 'https://technika-karlsruhe.github.io/'
+    },
+    {
+        name: 'TXT',
+        extensionId: 'txt',
+        collaborator: 'technika',
+        iconURL: txtIconURL,
+        insetIconURL: txtInsetIconURL,
+        description: (
+            <FormattedMessage
+                defaultMessage="Connect your projects with the TXT."
+                description="Description for the 'fischertechnik' extension"
+                id="gui.extension.txt.description"
+            />
+        ),
+        featured: true,
+        disabled: false,
+        bluetoothRequired: false,
+        internetConnectionRequired: false,
+        launchPeripheralConnectionFlow: false,
+        useAutoScan: false,
+        connectionIconURL: txtConnectionIconURL,
+        connectionSmallIconURL: txtConnectionSmallIconURL,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting"
+                description="Message to help people connect to their fischertechnik."
+                id="gui.extension.txt.connectingMessage"
+            />
+        ),
+        helpLink: 'https://technika-karlsruhe.github.io/'
+    },
+    {
+        name: 'Robby',
+        extensionId: 'robby',
+        collaborator: 'technika',
+        iconURL: robbyIconURL,
+        insetIconURL: robbyInsetIconURL,
+        description: (
+            <FormattedMessage
+                defaultMessage="Connect your projects with Robby."
+                description="Description for the 'fischertechnik' extension"
+                id="gui.extension.robby.description"
+            />
+        ),
+        featured: true,
+        disabled: false,
+        bluetoothRequired: true,
+        internetConnectionRequired: false,
+        launchPeripheralConnectionFlow: false,
+        useAutoScan: false,
+        connectionIconURL: robbyConnectionIconURL,
+        connectionSmallIconURL: robbyConnectionSmallIconURL,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting"
+                description="Message to help people connect to their fischertechnik."
+                id="gui.extension.robby.connectingMessage"
+            />
+        ),
+        helpLink: 'https://technika-karlsruhe.github.io/'
+    },
+    {
+        name: 'TX',
+        extensionId: 'tx',
+        collaborator: 'technika',
+        iconURL: txIconURL,
+        insetIconURL: txInsetIconURL,
+        description: (
+            <FormattedMessage
+                defaultMessage="Connect your projects with TX."
+                description="Description for the 'fischertechnik' extension"
+                id="gui.extension.tx.description"
+            />
+        ),
+        featured: true,
+        disabled: false,
+        bluetoothRequired: false,
+        internetConnectionRequired: false,
+        launchPeripheralConnectionFlow: false,
+        useAutoScan: false,
+        connectionIconURL: txConnectionIconURL,
+        connectionSmallIconURL: txConnectionSmallIconURL,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting"
+                description="Message to help people connect to their fischertechnik."
+                id="gui.extension.tx.connectingMessage"
+            />
+        ),
+        helpLink: 'https://technika-karlsruhe.github.io/'
+    },
+    {
+        name: 'TXT4.0',
+        extensionId: 'txt40',
+        collaborator: 'technika',
+        iconURL: txt40IconURL,
+        insetIconURL: txt40InsetIconURL,
+        description: (
+            <FormattedMessage
+                defaultMessage="Connect your projects with TXT4.0."
+                description="Description for the 'fischertechnik' extension"
+                id="gui.extension.txt40.description"
+            />
+        ),
+        featured: true,
+        disabled: false,
+        bluetoothRequired: false,
+        internetConnectionRequired: false,
+        launchPeripheralConnectionFlow: false,
+        useAutoScan: false,
+        connectionIconURL: txt40ConnectionIconURL,
+        connectionSmallIconURL: txt40ConnectionSmallIconURL,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting"
+                description="Message to help people connect to their fischertechnik."
+                id="gui.extension.txt40.connectingMessage"
+            />
+        ),
+        helpLink: 'https://technika-karlsruhe.github.io/'
+    },
+    {
+        name: 'LT',
+        extensionId: 'lt',
+        collaborator: 'technika',
+        iconURL: ltIconURL,
+        insetIconURL: ltInsetIconURL,
+        description: (
+            <FormattedMessage
+                defaultMessage="Connect your projects with LT."
+                description="Description for the 'fischertechnik' extension"
+                id="gui.extension.lt.description"
+            />
+        ),
+        featured: true,
+        disabled: false,
+        bluetoothRequired: false,
+        internetConnectionRequired: false,
+        launchPeripheralConnectionFlow: false,
+        useAutoScan: false,
+        connectionIconURL: ltConnectionIconURL,
+        connectionSmallIconURL: ltConnectionSmallIconURL,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting"
+                description="Message to help people connect to their fischertechnik."
+                id="gui.extension.lt.connectingMessage"
+            />
+        ),
+        helpLink: 'https://technika-karlsruhe.github.io/'
+    },
+    {
+        name: 'ftduino',
+        extensionId: 'ftduino',
+        collaborator: 'technika',
+        iconURL: ftduinoIconURL,
+        insetIconURL: ftduinoInsetIconURL,
+        description: (
+            <FormattedMessage
+                defaultMessage="Connect your projects with ftduino."
+                description="Description for the 'fischertechnik' extension"
+                id="gui.extension.ftduino.description"
+            />
+        ),
+        featured: true,
+        disabled: false,
+        bluetoothRequired: false,
+        internetConnectionRequired: false,
+        launchPeripheralConnectionFlow: false,
+        useAutoScan: false,
+        connectionIconURL: ftduinoConnectionIconURL,
+        connectionSmallIconURL: ftduinoConnectionSmallIconURL,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting"
+                description="Message to help people connect to their fischertechnik."
+                id="gui.extension.ftduino.connectingMessage"
+            />
+        ),
+        helpLink: 'https://technika-karlsruhe.github.io/'
+    },
+    {
+        name: 'RX',
+        extensionId: 'rx',
+        collaborator: 'technika',
+        iconURL: rxIconURL,
+        insetIconURL: rxInsetIconURL,
+        description: (
+            <FormattedMessage
+                defaultMessage="Connect your projects with RX."
+                description="Description for the 'fischertechnik' extension"
+                id="gui.extension.rx.description"
+            />
+        ),
+        featured: true,
+        disabled: false,
+        bluetoothRequired: false,
+        internetConnectionRequired: false,
+        launchPeripheralConnectionFlow: false,
+        useAutoScan: false,
+        connectionIconURL: rxConnectionIconURL,
+        connectionSmallIconURL: rxConnectionSmallIconURL,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting"
+                description="Message to help people connect to their fischertechnik."
+                id="gui.extension.rx.connectingMessage"
+            />
+        ),
+        helpLink: 'https://technika-karlsruhe.github.io/'
+    },
+    {
+        name: 'TensorFlow',
+        extensionId: 'tensorflow',
+        collaborator: 'technika',
+        iconURL: tfIconURL,
+        insetIconURL: tfInsetIconURL,
+        description: (
+            <FormattedMessage
+                defaultMessage="AI with TensorFlow and Teachable Machine."
+                description="Description for the 'TensorFlow' extension"
+                id="gui.extension.tf.description"
+            />
+        ),
+        featured: true,
+        disabled: false,
+        bluetoothRequired: false,
+        internetConnectionRequired: false,
+        launchPeripheralConnectionFlow: false,
+        useAutoScan: false,
+        connectionIconURL: tfConnectionIconURL,
+        connectionSmallIconURL: tfConnectionSmallIconURL,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting"
+                description="Message to help people connect to their fischertechnik."
+                id="gui.extension.tf.connectingMessage"
+            />
+        ),
+        helpLink: 'https://technika-karlsruhe.github.io/'
+    },
     {
         name: (
             <FormattedMessage
