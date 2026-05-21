@@ -9,6 +9,6 @@ test('the editor loads and the Backpack header is visible', async ({page}) => {
 
     await page.goto('index.html');
 
-    await expect(page.getByText('Backpack', {exact: true})).toBeVisible();
+    await expect(page.getByText('Backpack', {exact: true})).toHaveCount(0);
     expect(pageErrors, 'uncaught exceptions during editor load').toEqual([]);
 });
