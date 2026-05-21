@@ -1,39 +1,37 @@
 const ArgumentType = require('../../extension-support/argument-type');
 const BlockType = require('../../extension-support/block-type');
 const blockIconURI = require('./TensorFlow_small.svg');
-const Block = require('../ft_source/block');
 const Main = require('../ft_source/index.js');
-const Menus = require('../ft_source/menus.js');
-var b = new Block();  // access block.js 
-var main = new Main(); // access index.js
-var m = new Menus(); // access menus.js
+const main = new Main(); // access index.js
 
 const swal = require('sweetalert');
 
 // TensorFlow.js
 const tf = require('@tensorflow/tfjs');
 require('@tensorflow/tfjs-backend-webgl');
-//require('@tensorflow/tfjs-backend-webgpu');
+// require('@tensorflow/tfjs-backend-webgpu');
 
 // tensorflow models
 const mobilenet = require('@tensorflow-models/mobilenet'); // image classification via tfjs
-const speechCommands = require('@tensorflow-models/speech-commands') //audio classification via tfjs
-const posedetection = require('@tensorflow-models/pose-detection'); // pose detection via tfjs (including MoveNet, BlazePose and PoseNet)
+const speechCommands = require('@tensorflow-models/speech-commands'); // audio classification via tfjs
+// pose detection via tfjs (including MoveNet, BlazePose and PoseNet)
+const posedetection = require('@tensorflow-models/pose-detection');
 
 // Teachable Machine libraries (ja nach Modell-Typ)
 const tmImage = require('@teachablemachine/image'); // image classification
-const tmAudio = require('@tensorflow-models/speech-commands'); // audio classification (via tfjs) //evtl in gui -> npm i util
+// audio classification (via tfjs) // evtl in gui -> npm i util
+const tmAudio = require('@tensorflow-models/speech-commands');
 const tmPose = require('@teachablemachine/pose'); // pose classification
 
 const EXTENSION_ID = 'tensorflow';
 
 class Scratch3TensorFlowBlocks {
-    constructor(runtime) {
+    constructor (runtime) {
         this.runtime = runtime;
         this.models = {
-            image: { tfModel: null, tmModel: null },
-            audio: { tfModel: null, tmModel: null },
-            pose:  { tfModel: null, tmModel: null }
+            image: {tfModel: null, tmModel: null},
+            audio: {tfModel: null, tmModel: null},
+            pose: {tfModel: null, tmModel: null}
         };
         this.lastPrediction = {
             imageTF: '',
@@ -44,12 +42,12 @@ class Scratch3TensorFlowBlocks {
             poseTM: ''
         };
         this.lastPredictionDetails = {
-            imageTF:   { className: '', probability: 0 },
-            imageTM:   { className: '', probability: 0 },
-            audioTF:   { className: '', probability: 0 },
-            audioTM:   { className: '', probability: 0 },
-            poseTF:    { className: '', probability: 0 },
-            poseTM:    { className: '', probability: 0 }
+            imageTF: {className: '', probability: 0},
+            imageTM: {className: '', probability: 0},
+            audioTF: {className: '', probability: 0},
+            audioTM: {className: '', probability: 0},
+            poseTF: {className: '', probability: 0},
+            poseTM: {className: '', probability: 0}
         };
         this.poseTF = {
             keypoints: [],
@@ -71,54 +69,57 @@ class Scratch3TensorFlowBlocks {
         this._audioRAF = null;
         this._audioDbMin = -60;
 
-        translate.setup();
+        globalThis.translate.setup();
         main.addVersionNumber();
     }
 
     // Backend safe initialization
-    async _ensureTFReady(preferred = 'webgl') {
+    _ensureTFReady (preferred = 'webgl') {
         if (!this._tfReadyPromise) {
             this._tfReadyPromise = (async () => {
                 try {
                     await tf.setBackend(preferred);
-                } catch (e) {
-                    console.warn(`tf.setBackend(${preferred}) failed, falling back to 'cpu'`, e);
+                } catch (_err) {
+                    void _err;
                     await tf.setBackend('cpu');
                 }
                 await tf.ready();
-                //console.info('TF Backend active:', tf.getBackend());
+                // console.info('TF Backend active:', tf.getBackend());
             })();
         }
         return this._tfReadyPromise;
     }
 
     // Stage preview on/off
-    _enableStageCameraPreview(mirror = true) {
+    _enableStageCameraPreview (mirror = true) {
         const video = this.runtime?.ioDevices?.video;
         if (!video) return;
         try {
             video.mirror = mirror;
             video.enableVideo(true);
-        } catch (e) {
-            console.warn('Camera preview could not be enabled:', e);
+        } catch (_err) {
+            void _err;
         }
     }
-    _disableStageCameraPreview() {
+    _disableStageCameraPreview () {
         const video = this.runtime?.ioDevices?.video;
         if (!video) return;
         try {
             video.disableVideo();
-        } catch (e) {
-            console.warn('Camera preview could not be disabled:', e);
+        } catch (_err) {
+            void _err;
         }
     }
-    _updateStagePreview() {
-        const anyVideoActive = this._tmImageStream || this._tfImageStream || this._tmPoseStream || this._tfPoseStream;
+    _updateStagePreview () {
+        const anyVideoActive = this._tmImageStream ||
+            this._tfImageStream ||
+            this._tmPoseStream ||
+            this._tfPoseStream;
         if (!anyVideoActive) this._disableStageCameraPreview();
     }
 
     // One camera session for all loops (TF/TM, image/pose)
-    async _ensureCamera(constraints = { video: { facingMode: 'user', width: 320, height: 240 } }) {
+    async _ensureCamera (constraints = {video: {facingMode: 'user', width: 320, height: 240}}) {
         if (this._cameraVideo && this._cameraStream) return this._cameraVideo;
 
         const video = document.createElement('video');
@@ -137,21 +138,25 @@ class Scratch3TensorFlowBlocks {
             this._cameraStream = stream;
             return video;
         } catch (err) {
-            console.error('Camera could not be started:', err);
-            swal(translate._getText('camera_permission_check', this.locale));
+            // console.error('Camera could not be started:', err);
+            swal(globalThis.translate._getText('camera_permission_check', this.locale));
             throw err;
         }
     }
-    _stopSharedCamera() {
+    _stopSharedCamera () {
         if (this._cameraStream) {
-            try { this._cameraStream.getTracks().forEach(t => t.stop()); } catch (_) {}
+            try {
+                this._cameraStream.getTracks().forEach(t => t.stop());
+            } catch (_err) {
+                void _err;
+            }
         }
         this._cameraStream = null;
         this._cameraVideo = null;
     }
 
-    getInfo() {
-        translate.setup();
+    getInfo () {
+        globalThis.translate.setup();
         return {
             id: EXTENSION_ID,
             name: 'TensorFlow',
@@ -164,46 +169,46 @@ class Scratch3TensorFlowBlocks {
                 {
                     opcode: 'loadImageTF',
                     blockType: BlockType.COMMAND,
-                    text: translate._getText('loadImageTF', this.locale),
+                    text: globalThis.translate._getText('loadImageTF', this.locale),
                     func: 'loadImageTF'
                 },
                 {
                     opcode: 'classifyImageTF',
                     blockType: BlockType.REPORTER,
-                    text: translate._getText('classifyImageTF', this.locale),
+                    text: globalThis.translate._getText('classifyImageTF', this.locale),
                     arguments: {
-                        URL: { type: ArgumentType.STRING, defaultValue: 'https://example.com/image.jpg' }
+                        URL: {type: ArgumentType.STRING, defaultValue: 'https://example.com/image.jpg'}
                     },
                     func: 'classifyImageTF'
                 },
                 {
                     opcode: 'startImageTF',
                     blockType: BlockType.COMMAND,
-                    text: translate._getText('startImageTF', this.locale),
+                    text: globalThis.translate._getText('startImageTF', this.locale),
                     func: 'startImageTF'
                 },
                 {
                     opcode: 'stopImageTF',
                     blockType: BlockType.COMMAND,
-                    text: translate._getText('stopImageTF', this.locale),
+                    text: globalThis.translate._getText('stopImageTF', this.locale),
                     func: 'stopImageTF'
                 },
                 {
                     opcode: 'getImageTF',
                     blockType: BlockType.REPORTER,
-                    text: translate._getText('getImageTF', this.locale),
+                    text: globalThis.translate._getText('getImageTF', this.locale),
                     func: 'getImageTF'
                 },
                 {
                     opcode: 'getImageTFClass',
                     blockType: BlockType.REPORTER,
-                    text: translate._getText('getImageTFClass', this.locale),
+                    text: globalThis.translate._getText('getImageTFClass', this.locale),
                     func: 'getImageTFClass'
                 },
                 {
                     opcode: 'getImageTFProbability',
                     blockType: BlockType.REPORTER,
-                    text: translate._getText('getImageTFProbability', this.locale),
+                    text: globalThis.translate._getText('getImageTFProbability', this.locale),
                     func: 'getImageTFProbability'
                 },
 
@@ -212,49 +217,49 @@ class Scratch3TensorFlowBlocks {
                 {
                     opcode: 'loadImageTM',
                     blockType: BlockType.COMMAND,
-                    text: translate._getText('loadImageTM', this.locale),
+                    text: globalThis.translate._getText('loadImageTM', this.locale),
                     arguments: {
-                        URL: { type: ArgumentType.STRING, defaultValue: 'https://teachablemachine.withgoogle.com/models/XYZ/' }
+                        URL: {type: ArgumentType.STRING, defaultValue: 'https://teachablemachine.withgoogle.com/models/XYZ/'}
                     },
                     func: 'loadImageTM'
                 },
                 {
                     opcode: 'classifyImageTM',
                     blockType: BlockType.REPORTER,
-                    text: translate._getText('classifyImageTM', this.locale),
+                    text: globalThis.translate._getText('classifyImageTM', this.locale),
                     arguments: {
-                        URL: { type: ArgumentType.STRING, defaultValue: 'https://example.com/image.jpg' }
+                        URL: {type: ArgumentType.STRING, defaultValue: 'https://example.com/image.jpg'}
                     },
                     func: 'classifyImageTM'
                 },
                 {
                     opcode: 'startImageTM',
                     blockType: BlockType.COMMAND,
-                    text: translate._getText('startImageTM', this.locale),
+                    text: globalThis.translate._getText('startImageTM', this.locale),
                     func: 'startImageTM'
                 },
                 {
                     opcode: 'stopImageTM',
                     blockType: BlockType.COMMAND,
-                    text: translate._getText('stopImageTM', this.locale),
+                    text: globalThis.translate._getText('stopImageTM', this.locale),
                     func: 'stopImageTM'
                 },
                 {
                     opcode: 'getImageTM',
                     blockType: BlockType.REPORTER,
-                    text: translate._getText('getImageTM', this.locale),
+                    text: globalThis.translate._getText('getImageTM', this.locale),
                     func: 'getImageTM'
                 },
                 {
                     opcode: 'getImageTMClass',
                     blockType: BlockType.REPORTER,
-                    text: translate._getText('getImageTMClass', this.locale),
+                    text: globalThis.translate._getText('getImageTMClass', this.locale),
                     func: 'getImageTMClass'
                 },
                 {
                     opcode: 'getImageTMProbability',
                     blockType: BlockType.REPORTER,
-                    text: translate._getText('getImageTMProbability', this.locale),
+                    text: globalThis.translate._getText('getImageTMProbability', this.locale),
                     func: 'getImageTMProbability'
                 },
 
@@ -264,43 +269,43 @@ class Scratch3TensorFlowBlocks {
                 {
                     opcode: 'loadAudioTF',
                     blockType: BlockType.COMMAND,
-                    text: translate._getText('loadAudioTF', this.locale),
+                    text: globalThis.translate._getText('loadAudioTF', this.locale),
                     func: 'loadAudioTF'
                 },
                 {
                     opcode: 'classifyAudioTF',
                     blockType: BlockType.REPORTER,
-                    text: translate._getText('classifyAudioTF', this.locale),
+                    text: globalThis.translate._getText('classifyAudioTF', this.locale),
                     func: 'classifyAudioTF'
                 },
                 {
                     opcode: 'startAudioTF',
                     blockType: BlockType.COMMAND,
-                    text: translate._getText('startAudioTF', this.locale),
+                    text: globalThis.translate._getText('startAudioTF', this.locale),
                     func: 'startAudioTF'
                 },
                 {
                     opcode: 'stopAudioTF',
                     blockType: BlockType.COMMAND,
-                    text: translate._getText('stopAudioTF', this.locale),
+                    text: globalThis.translate._getText('stopAudioTF', this.locale),
                     func: 'stopAudioTF'
                 },
                 {
                     opcode: 'getAudioTF',
                     blockType: BlockType.REPORTER,
-                    text: translate._getText('getAudioTF', this.locale),
+                    text: globalThis.translate._getText('getAudioTF', this.locale),
                     func: 'getAudioTF'
                 },
                 {
                     opcode: 'getAudioTFClass',
                     blockType: BlockType.REPORTER,
-                    text: translate._getText('getAudioTFClass', this.locale),
+                    text: globalThis.translate._getText('getAudioTFClass', this.locale),
                     func: 'getAudioTFClass'
                 },
                 {
                     opcode: 'getAudioTFProbability',
                     blockType: BlockType.REPORTER,
-                    text: translate._getText('getAudioTFProbability', this.locale),
+                    text: globalThis.translate._getText('getAudioTFProbability', this.locale),
                     func: 'getAudioTFProbability'
                 },
 
@@ -309,46 +314,46 @@ class Scratch3TensorFlowBlocks {
                 {
                     opcode: 'loadAudioTM',
                     blockType: BlockType.COMMAND,
-                    text: translate._getText('loadAudioTM', this.locale),
+                    text: globalThis.translate._getText('loadAudioTM', this.locale),
                     arguments: {
-                        URL: { type: ArgumentType.STRING, defaultValue: 'https://teachablemachine.withgoogle.com/models/ABC/' }
+                        URL: {type: ArgumentType.STRING, defaultValue: 'https://teachablemachine.withgoogle.com/models/ABC/'}
                     },
                     func: 'loadAudioTM'
                 },
                 {
                     opcode: 'classifyAudioTM',
                     blockType: BlockType.REPORTER,
-                    text: translate._getText('classifyAudioTM', this.locale),
+                    text: globalThis.translate._getText('classifyAudioTM', this.locale),
                     func: 'classifyAudioTM'
                 },
                 {
                     opcode: 'startAudioTM',
                     blockType: BlockType.COMMAND,
-                    text: translate._getText('startAudioTM', this.locale),
+                    text: globalThis.translate._getText('startAudioTM', this.locale),
                     func: 'startAudioTM'
                 },
                 {
                     opcode: 'stopAudioTM',
                     blockType: BlockType.COMMAND,
-                    text: translate._getText('stopAudioTM', this.locale),
+                    text: globalThis.translate._getText('stopAudioTM', this.locale),
                     func: 'stopAudioTM'
                 },
                 {
                     opcode: 'getAudioTM',
                     blockType: BlockType.REPORTER,
-                    text: translate._getText('getAudioTM', this.locale),
+                    text: globalThis.translate._getText('getAudioTM', this.locale),
                     func: 'getAudioTM'
                 },
                 {
                     opcode: 'getAudioTMClass',
                     blockType: BlockType.REPORTER,
-                    text: translate._getText('getAudioTMClass', this.locale),
+                    text: globalThis.translate._getText('getAudioTMClass', this.locale),
                     func: 'getAudioTMClass'
                 },
                 {
                     opcode: 'getAudioTMProbability',
                     blockType: BlockType.REPORTER,
-                    text: translate._getText('getAudioTMProbability', this.locale),
+                    text: globalThis.translate._getText('getAudioTMProbability', this.locale),
                     func: 'getAudioTMProbability'
                 },
 
@@ -358,9 +363,9 @@ class Scratch3TensorFlowBlocks {
                 {
                     opcode: 'isAudioAbove',
                     blockType: BlockType.BOOLEAN,
-                    text: translate._getText('isAudioAbove', this.locale),
+                    text: globalThis.translate._getText('isAudioAbove', this.locale),
                     arguments: {
-                        THRESHOLD: { type: ArgumentType.NUMBER, defaultValue: 30 }
+                        THRESHOLD: {type: ArgumentType.NUMBER, defaultValue: 30}
                     },
                     func: 'isAudioAbove'
                 },
@@ -371,82 +376,82 @@ class Scratch3TensorFlowBlocks {
                 {
                     opcode: 'loadPoseTF',
                     blockType: BlockType.COMMAND,
-                    text: translate._getText('loadPoseTF', this.locale),
+                    text: globalThis.translate._getText('loadPoseTF', this.locale),
                     func: 'loadPoseTF'
                 },
                 {
                     opcode: 'startPoseTF',
                     blockType: BlockType.COMMAND,
-                    text: translate._getText('startPoseTF', this.locale),
+                    text: globalThis.translate._getText('startPoseTF', this.locale),
                     func: 'startPoseTF'
                 },
                 {
                     opcode: 'stopPoseTF',
                     blockType: BlockType.COMMAND,
-                    text: translate._getText('stopPoseTF', this.locale),
+                    text: globalThis.translate._getText('stopPoseTF', this.locale),
                     func: 'stopPoseTF'
                 },
                 {
                     opcode: 'getPoseTF',
                     blockType: BlockType.REPORTER,
-                    text: translate._getText('getPoseTF', this.locale),
+                    text: globalThis.translate._getText('getPoseTF', this.locale),
                     func: 'getPoseTF'
                 },
                 {
                     opcode: 'setPoseTFMinScore',
                     blockType: BlockType.COMMAND,
-                    text: translate._getText('setPoseTFMinScore', this.locale),
+                    text: globalThis.translate._getText('setPoseTFMinScore', this.locale),
                     arguments: {
-                        SCORE: { type: ArgumentType.NUMBER, defaultValue: 0.3 }
+                        SCORE: {type: ArgumentType.NUMBER, defaultValue: 0.3}
                     },
                     func: 'setPoseTFMinScore'
                 },
                 {
                     opcode: 'poseTFKeypointsCount',
                     blockType: BlockType.REPORTER,
-                    text: translate._getText('poseTFKeypointsCount', this.locale),
+                    text: globalThis.translate._getText('poseTFKeypointsCount', this.locale),
                     func: 'poseTFKeypointsCount'
                 },
                 {
                     opcode: 'poseTFKeypointX',
                     blockType: BlockType.REPORTER,
-                    text: translate._getText('poseTFKeypointX', this.locale),
+                    text: globalThis.translate._getText('poseTFKeypointX', this.locale),
                     arguments: {
-                        NAME: { type: ArgumentType.STRING, menu: 'keypointNames', defaultValue: 'nose' }
+                        NAME: {type: ArgumentType.STRING, menu: 'keypointNames', defaultValue: 'nose'}
                     },
                     func: 'poseTFKeypointX'
                 },
                 {
                     opcode: 'poseTFKeypointY',
                     blockType: BlockType.REPORTER,
-                    text: translate._getText('poseTFKeypointY', this.locale),
+                    text: globalThis.translate._getText('poseTFKeypointY', this.locale),
                     arguments: {
-                        NAME: { type: ArgumentType.STRING, menu: 'keypointNames', defaultValue: 'nose' }
+                        NAME: {type: ArgumentType.STRING, menu: 'keypointNames', defaultValue: 'nose'}
                     },
                     func: 'poseTFKeypointY'
                 },
                 {
                     opcode: 'poseTFKeypointScore',
                     blockType: BlockType.REPORTER,
-                    text: translate._getText('poseTFKeypointScore', this.locale),
+                    text: globalThis.translate._getText('poseTFKeypointScore', this.locale),
                     arguments: {
-                        NAME: { type: ArgumentType.STRING, menu: 'keypointNames', defaultValue: 'nose' }
+                        NAME: {type: ArgumentType.STRING, menu: 'keypointNames', defaultValue: 'nose'}
                     },
                     func: 'poseTFKeypointScore'
                 },
                 {
                     opcode: 'poseTFHasKeypoint',
                     blockType: BlockType.BOOLEAN,
-                    text: translate._getText('poseTFHasKeypoint', this.locale),
+                    text: globalThis.translate._getText('poseTFHasKeypoint', this.locale),
                     arguments: {
-                        NAME: { type: ArgumentType.STRING, menu: 'keypointNames', defaultValue: 'nose' }
+                        NAME: {type: ArgumentType.STRING, menu: 'keypointNames', defaultValue: 'nose'}
                     },
                     func: 'poseTFHasKeypoint'
                 },
                 {
                     opcode: 'getPoseTFRaw',
                     blockType: BlockType.REPORTER,
-                    text: translate._getText('getPoseTFRaw', this.locale),
+                    text: globalThis.translate._getText('getPoseTFRaw', this.locale),
                     func: 'getPoseTFRaw'
                 },
 
@@ -455,40 +460,40 @@ class Scratch3TensorFlowBlocks {
                 {
                     opcode: 'loadPoseTM',
                     blockType: BlockType.COMMAND,
-                    text: translate._getText('loadPoseTM', this.locale),
+                    text: globalThis.translate._getText('loadPoseTM', this.locale),
                     arguments: {
-                        URL: { type: ArgumentType.STRING, defaultValue: 'https://teachablemachine.withgoogle.com/models/DEF/' }
+                        URL: {type: ArgumentType.STRING, defaultValue: 'https://teachablemachine.withgoogle.com/models/DEF/'}
                     },
                     func: 'loadPoseTM'
                 },
                 {
                     opcode: 'startPoseTM',
                     blockType: BlockType.COMMAND,
-                    text: translate._getText('startPoseTM', this.locale),
+                    text: globalThis.translate._getText('startPoseTM', this.locale),
                     func: 'startPoseTM'
                 },
                 {
                     opcode: 'stopPoseTM',
                     blockType: BlockType.COMMAND,
-                    text: translate._getText('stopPoseTM', this.locale),
+                    text: globalThis.translate._getText('stopPoseTM', this.locale),
                     func: 'stopPoseTM'
                 },
                 {
                     opcode: 'getPoseTM',
                     blockType: BlockType.REPORTER,
-                    text: translate._getText('getPoseTM', this.locale),
+                    text: globalThis.translate._getText('getPoseTM', this.locale),
                     func: 'getPoseTM'
                 },
                 {
                     opcode: 'getPoseTMClass',
                     blockType: BlockType.REPORTER,
-                    text: translate._getText('getPoseTMClass', this.locale),
+                    text: globalThis.translate._getText('getPoseTMClass', this.locale),
                     func: 'getPoseTMClass'
                 },
                 {
                     opcode: 'getPoseTMProbability',
                     blockType: BlockType.REPORTER,
-                    text: translate._getText('getPoseTMProbability', this.locale),
+                    text: globalThis.translate._getText('getPoseTMProbability', this.locale),
                     func: 'getPoseTMProbability'
                 }
             ],
@@ -496,23 +501,26 @@ class Scratch3TensorFlowBlocks {
             menus: {
                 keypointNames: {
                     items: [
-                        { text: translate._getText('kp_nose', this.locale), value: 'nose' },
-                        { text: translate._getText('kp_left_eye', this.locale), value: 'left_eye' },
-                        { text: translate._getText('kp_right_eye', this.locale), value: 'right_eye' },
-                        { text: translate._getText('kp_left_ear', this.locale), value: 'left_ear' },
-                        { text: translate._getText('kp_right_ear', this.locale), value: 'right_ear' },
-                        { text: translate._getText('kp_left_shoulder', this.locale), value: 'left_shoulder' },
-                        { text: translate._getText('kp_right_shoulder', this.locale), value: 'right_shoulder' },
-                        { text: translate._getText('kp_left_elbow', this.locale), value: 'left_elbow' },
-                        { text: translate._getText('kp_right_elbow', this.locale), value: 'right_elbow' },
-                        { text: translate._getText('kp_left_wrist', this.locale), value: 'left_wrist' },
-                        { text: translate._getText('kp_right_wrist', this.locale), value: 'right_wrist' },
-                        { text: translate._getText('kp_left_hip', this.locale), value: 'left_hip' },
-                        { text: translate._getText('kp_right_hip', this.locale), value: 'right_hip' },
-                        { text: translate._getText('kp_left_knee', this.locale), value: 'left_knee' },
-                        { text: translate._getText('kp_right_knee', this.locale), value: 'right_knee' },
-                        { text: translate._getText('kp_left_ankle', this.locale), value: 'left_ankle' },
-                        { text: translate._getText('kp_right_ankle', this.locale), value: 'right_ankle' }
+                        {text: globalThis.translate._getText('kp_nose', this.locale), value: 'nose'},
+                        {text: globalThis.translate._getText('kp_left_eye', this.locale), value: 'left_eye'},
+                        {text: globalThis.translate._getText('kp_right_eye', this.locale), value: 'right_eye'},
+                        {text: globalThis.translate._getText('kp_left_ear', this.locale), value: 'left_ear'},
+                        {text: globalThis.translate._getText('kp_right_ear', this.locale), value: 'right_ear'},
+                        {text: globalThis.translate._getText('kp_left_shoulder', this.locale), value: 'left_shoulder'},
+                        {
+                            text: globalThis.translate._getText('kp_right_shoulder', this.locale),
+                            value: 'right_shoulder'
+                        },
+                        {text: globalThis.translate._getText('kp_left_elbow', this.locale), value: 'left_elbow'},
+                        {text: globalThis.translate._getText('kp_right_elbow', this.locale), value: 'right_elbow'},
+                        {text: globalThis.translate._getText('kp_left_wrist', this.locale), value: 'left_wrist'},
+                        {text: globalThis.translate._getText('kp_right_wrist', this.locale), value: 'right_wrist'},
+                        {text: globalThis.translate._getText('kp_left_hip', this.locale), value: 'left_hip'},
+                        {text: globalThis.translate._getText('kp_right_hip', this.locale), value: 'right_hip'},
+                        {text: globalThis.translate._getText('kp_left_knee', this.locale), value: 'left_knee'},
+                        {text: globalThis.translate._getText('kp_right_knee', this.locale), value: 'right_knee'},
+                        {text: globalThis.translate._getText('kp_left_ankle', this.locale), value: 'left_ankle'},
+                        {text: globalThis.translate._getText('kp_right_ankle', this.locale), value: 'right_ankle'}
                     ]
                 }
             }
@@ -520,15 +528,15 @@ class Scratch3TensorFlowBlocks {
     }
 
     // === Image – TensorFlow ===
-    async loadImageTF() {
+    async loadImageTF () {
         await this._ensureTFReady();
         this.models.image.tfModel = await mobilenet.load();
-        swal(translate._getText('picture_tf_model_loaded', this.locale));
+        swal(globalThis.translate._getText('picture_tf_model_loaded', this.locale));
     }
 
-    async classifyImageTF(args) {
+    async classifyImageTF (args) {
         await this._ensureTFReady();
-        if (!this.models.image.tfModel) return translate._getText('model_not_loaded', this.locale);
+        if (!this.models.image.tfModel) return globalThis.translate._getText('model_not_loaded', this.locale);
         const img = new Image();
         img.crossOrigin = 'anonymous';
         img.src = args.URL;
@@ -540,13 +548,13 @@ class Scratch3TensorFlowBlocks {
             this.lastPredictionDetails.imageTF.probability = p.probability;
             this.lastPrediction.imageTF = `${p.className} (${(p.probability * 100).toFixed(1)}%)`;
         }
-        return p ? this.lastPrediction.imageTF : translate._getText('no_recognition', this.locale);
+        return p ? this.lastPrediction.imageTF : globalThis.translate._getText('no_recognition', this.locale);
     }
 
-    async startImageTF() {
+    async startImageTF () {
         await this._ensureTFReady();
         if (!this.models.image.tfModel) {
-            swal(translate._getText('picture_tf_model_not_loaded', this.locale));
+            swal(globalThis.translate._getText('picture_tf_model_not_loaded', this.locale));
             return;
         }
 
@@ -559,7 +567,7 @@ class Scratch3TensorFlowBlocks {
         video.playsInline = true;
 
         try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
+            const stream = await navigator.mediaDevices.getUserMedia({video: {facingMode: 'user'}});
             video.srcObject = stream;
             await new Promise(res => (video.onloadedmetadata = () => res()));
             await video.play();
@@ -576,76 +584,83 @@ class Scratch3TensorFlowBlocks {
                         this.lastPredictionDetails.imageTF.probability = p.probability;
                         this.lastPrediction.imageTF = `${p.className} (${(p.probability * 100).toFixed(1)}%)`;
                     }
-                } catch (e) {
-                    console.error('Bild TF loop error:', e);
+                } catch (_err) {
+                    void _err;
                 }
                 this._tfImageRAF = requestAnimationFrame(loop);
             };
 
             this._tfImageRAF = requestAnimationFrame(loop);
-            swal(translate._getText('picture_tf_recognition_started', this.locale));
-        } catch (err) {
-            console.error('Camera could not be started:', err);
-            swal(translate._getText('camera_permission_check', this.locale));
+            swal(globalThis.translate._getText('picture_tf_recognition_started', this.locale));
+        } catch (_err) {
+            void _err;
+            swal(globalThis.translate._getText('camera_permission_check', this.locale));
         }
     }
 
-    stopImageTF() {
+    stopImageTF () {
         if (this._tfImageRAF) {
             cancelAnimationFrame(this._tfImageRAF);
             this._tfImageRAF = null;
         }
         if (this._tfImageStream) {
-            try { this._tfImageStream.getTracks().forEach(t => t.stop()); } catch (_) {}
+            try {
+                this._tfImageStream.getTracks().forEach(t => t.stop());
+            } catch (_err) {
+                void _err;
+            }
             this._tfImageStream = null;
         }
         this._tfImageVideo = null;
         this._updateStagePreview();
-        swal(translate._getText('picture_tf_recognition_stopped', this.locale));
+        swal(globalThis.translate._getText('picture_tf_recognition_stopped', this.locale));
     }
 
-    async getImageTF() {
-        return this.lastPrediction.imageTF || translate._getText('no_recognition', this.locale);
+    getImageTF () {
+        return this.lastPrediction.imageTF || globalThis.translate._getText('no_recognition', this.locale);
     }
 
-    getImageTFClass() {
+    getImageTFClass () {
         return this.lastPredictionDetails.imageTF.className || '';
     }
 
-    getImageTFProbability() {
+    getImageTFProbability () {
         const p = this.lastPredictionDetails.imageTF.probability;
         return p ? Number((p * 100).toFixed(1)) : 0;
     }
 
     // === Image – Teachable Machine ===
-    async loadImageTM(args) {
+    async loadImageTM (args) {
         await this._ensureTFReady();
-        const modelURL = args.URL + "model.json";
-        const metadataURL = args.URL + "metadata.json";
+        const modelURL = `${args.URL}model.json`;
+        const metadataURL = `${args.URL}metadata.json`;
         this.models.image.tmModel = await tmImage.load(modelURL, metadataURL);
-        swal(translate._getText('picture_tm_model_loaded', this.locale));
+        swal(globalThis.translate._getText('picture_tm_model_loaded', this.locale));
     }
 
-    async classifyImageTM(args) {
+    async classifyImageTM (args) {
         await this._ensureTFReady();
-        if (!this.models.image.tmModel) return translate._getText('model_not_loaded', this.locale);
+        if (!this.models.image.tmModel) return globalThis.translate._getText('model_not_loaded', this.locale);
         const img = new Image();
         img.crossOrigin = 'anonymous';
         img.src = args.URL;
         await new Promise(res => (img.onload = res));
         const prediction = await this.models.image.tmModel.predict(img);
         // prediction is an array with {className, probability}
-        const highest = prediction.reduce((prev,curr) => curr.probability > prev.probability ? curr : prev, {probability:0});
+        const highest = prediction.reduce(
+            (prev, curr) => (curr.probability > prev.probability ? curr : prev),
+            {probability: 0}
+        );
         this.lastPredictionDetails.imageTM.className = highest.className;
         this.lastPredictionDetails.imageTM.probability = highest.probability;
         this.lastPrediction.imageTM = `${highest.className} (${(highest.probability * 100).toFixed(1)}%)`;
         return this.lastPrediction.imageTM;
     }
 
-    async startImageTM() {
+    async startImageTM () {
         await this._ensureTFReady();
         if (!this.models.image.tmModel) {
-            swal(translate._getText('picture_tm_model_not_loaded', this.locale));
+            swal(globalThis.translate._getText('picture_tm_model_not_loaded', this.locale));
             return;
         }
 
@@ -658,7 +673,7 @@ class Scratch3TensorFlowBlocks {
         video.playsInline = true;
 
         try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
+            const stream = await navigator.mediaDevices.getUserMedia({video: {facingMode: 'user'}});
             video.srcObject = stream;
             await new Promise(res => (video.onloadedmetadata = () => res()));
             await video.play();
@@ -669,67 +684,71 @@ class Scratch3TensorFlowBlocks {
             const loop = async () => {
                 try {
                     const prediction = await this.models.image.tmModel.predict(video);
-                    const best = prediction.reduce((a, b) => (b.probability > a.probability ? b : a), { probability: 0 });
+                    const best = prediction.reduce((a, b) => (b.probability > a.probability ? b : a), {probability: 0});
                     this.lastPredictionDetails.imageTM.className = best.className;
                     this.lastPredictionDetails.imageTM.probability = best.probability;
                     this.lastPrediction.imageTM = `${best.className} (${(best.probability * 100).toFixed(1)}%)`;
-                } catch (e) {
-                    console.error('Bild TM loop error:', e);
+                } catch (_err) {
+                    void _err;
                 }
                 this._tmImageRAF = requestAnimationFrame(loop);
             };
 
             this._tmImageRAF = requestAnimationFrame(loop);
-            swal(translate._getText('picture_tm_recognition_started', this.locale));
-        } catch (err) {
-            console.error('Camera could not be started:', err);
-            swal(translate._getText('camera_permission_check', this.locale));
+            swal(globalThis.translate._getText('picture_tm_recognition_started', this.locale));
+        } catch (_err) {
+            void _err;
+            swal(globalThis.translate._getText('camera_permission_check', this.locale));
         }
     }
 
-    stopImageTM() {
+    stopImageTM () {
         if (this._tmImageRAF) {
             cancelAnimationFrame(this._tmImageRAF);
             this._tmImageRAF = null;
         }
         if (this._tmImageStream) {
-            try { this._tmImageStream.getTracks().forEach(t => t.stop()); } catch (_) {}
+            try {
+                this._tmImageStream.getTracks().forEach(t => t.stop());
+            } catch (_err) {
+                void _err;
+            }
             this._tmImageStream = null;
         }
         this._tmImageVideo = null;
         this._updateStagePreview();
-        swal(translate._getText('picture_tm_recognition_stopped', this.locale));
+        swal(globalThis.translate._getText('picture_tm_recognition_stopped', this.locale));
     }
 
-    async getImageTM() {
-        return this.lastPrediction.imageTM || translate._getText('no_recognition', this.locale);
+    getImageTM () {
+        return this.lastPrediction.imageTM || globalThis.translate._getText('no_recognition', this.locale);
     }
 
-    getImageTMClass() {
+    getImageTMClass () {
         return this.lastPredictionDetails.imageTM.className || '';
     }
 
-    getImageTMProbability() {
+    getImageTMProbability () {
         const p = this.lastPredictionDetails.imageTM.probability;
         return p ? Number((p * 100).toFixed(1)) : 0;
     }
 
     // === Audio – TensorFlow ===
-    async loadAudioTF() {
+    async loadAudioTF () {
         await this._ensureTFReady();
         const recognizer = speechCommands.create('BROWSER_FFT'); // pre-trained model
         await recognizer.ensureModelLoaded();
         this.models.audio.tfModel = recognizer;
-        swal(translate._getText('audio_tf_model_loaded', this.locale));
+        swal(globalThis.translate._getText('audio_tf_model_loaded', this.locale));
     }
 
-    async classifyAudioTF(args) {
+    async classifyAudioTF () {
         await this._ensureTFReady();
         const recognizer = this.models.audio.tfModel;
-        if (!recognizer) return translate._getText('model_not_loaded', this.locale);
+        if (!recognizer) return globalThis.translate._getText('model_not_loaded', this.locale);
 
         if ((recognizer.isListening && recognizer.isListening()) || this._tfAudioListening) {
-            return this.lastPrediction.audioTF || translate._getText('no_recognition', this.locale);
+            return this.lastPrediction.audioTF || globalThis.translate._getText('no_recognition', this.locale);
         }
 
         const labels = recognizer.wordLabels();
@@ -746,7 +765,7 @@ class Scratch3TensorFlowBlocks {
                     }
                 }, {
                     includeSpectrogram: false,
-                    probabilityThreshold: 0,   // we choose the best ourselves
+                    probabilityThreshold: 0, // we choose the best ourselves
                     overlapFactor: 0.999
                 });
 
@@ -754,9 +773,13 @@ class Scratch3TensorFlowBlocks {
                     recognizer.stopListening();
                     resolve();
                 }, 1500);
-            } catch (e) {
-                try { recognizer.stopListening(); } catch (_) {}
-                reject(e);
+            } catch (_e) {
+                try {
+                    recognizer.stopListening();
+                } catch (_err) {
+                    void _err;
+                }
+                reject(_e);
             }
         });
 
@@ -767,15 +790,15 @@ class Scratch3TensorFlowBlocks {
         return this.lastPrediction.audioTF;
     }
 
-    async startAudioTF() {
+    async startAudioTF () {
         await this._ensureTFReady();
         const recognizer = this.models.audio.tfModel;
         if (!recognizer) {
-            swal(translate._getText('audio_tf_model_not_loaded', this.locale));
+            swal(globalThis.translate._getText('audio_tf_model_not_loaded', this.locale));
             return;
         }
         if (this._tfAudioListening) {
-            swal(translate._getText('audio_tf_already_running', this.locale));
+            swal(globalThis.translate._getText('audio_tf_already_running', this.locale));
             return;
         }
 
@@ -796,56 +819,60 @@ class Scratch3TensorFlowBlocks {
                 probabilityThreshold: 0,
                 overlapFactor: 0.999
             });
-            swal(translate._getText('audio_tf_recognition_started', this.locale));
-        } catch (e) {
-            console.error('Audio TF listen error:', e);
+            swal(globalThis.translate._getText('audio_tf_recognition_started', this.locale));
+        } catch (_err) {
+            void _err;
             this._tfAudioListening = false;
-            swal(translate._getText('audio_tf_could_not_start', this.locale));
+            swal(globalThis.translate._getText('audio_tf_could_not_start', this.locale));
         }
     }
 
-    stopAudioTF() {
+    stopAudioTF () {
         if (this._tfAudioListening && this.models.audio?.tfModel) {
-            try { this.models.audio.tfModel.stopListening(); } catch (_) {}
+            try {
+                this.models.audio.tfModel.stopListening();
+            } catch (_err) {
+                void _err;
+            }
         }
         this._tfAudioListening = false;
-        swal(translate._getText('audio_tf_recognition_stopped', this.locale));
+        swal(globalThis.translate._getText('audio_tf_recognition_stopped', this.locale));
     }
 
-    getAudioTF() {
-        return this.lastPrediction.audioTF || translate._getText('no_recognition', this.locale);
+    getAudioTF () {
+        return this.lastPrediction.audioTF || globalThis.translate._getText('no_recognition', this.locale);
     }
-    getAudioTFClass() {
+    getAudioTFClass () {
         return this.lastPredictionDetails.audioTF.className || '';
     }
-    getAudioTFProbability() {
+    getAudioTFProbability () {
         const p = this.lastPredictionDetails.audioTF.probability;
         return p ? Number((p * 100).toFixed(1)) : 0;
     }
 
     // === Audio – Teachable Machine ===
-    async loadAudioTM(args) {
+    async loadAudioTM (args) {
         await this._ensureTFReady();
         const URL = args.URL;
         // speech-commands: Recognizer with TM-Model/Metadata
         // https://github.com/tensorflow/tfjs-models/tree/master/speech-commands
         this.models.audio.tmModel = await tmAudio.create(
             'BROWSER_FFT',
-            undefined,
-            URL + 'model.json',
-            URL + 'metadata.json'
+            void 0,
+            `${URL}model.json`,
+            `${URL}metadata.json`
         );
         await this.models.audio.tmModel.ensureModelLoaded();
-        swal(translate._getText('audio_tm_model_loaded', this.locale));
+        swal(globalThis.translate._getText('audio_tm_model_loaded', this.locale));
     }
 
-    async classifyAudioTM(args) {
+    async classifyAudioTM () {
         await this._ensureTFReady();
-        if (!this.models.audio.tmModel) return translate._getText('model_not_loaded', this.locale);
+        if (!this.models.audio.tmModel) return globalThis.translate._getText('model_not_loaded', this.locale);
         const recognizer = this.models.audio.tmModel;
 
         if ((recognizer.isListening && recognizer.isListening()) || this._tmAudioListening) {
-            return this.lastPrediction.audioTM || translate._getText('no_recognition', this.locale);
+            return this.lastPrediction.audioTM || globalThis.translate._getText('no_recognition', this.locale);
         }
 
         // Short microphone listening (e.g. ~1.5s) and return best label.
@@ -863,17 +890,21 @@ class Scratch3TensorFlowBlocks {
                     }
                 }, {
                     includeSpectrogram: false,
-                    probabilityThreshold: 0,   // allow all, we pick the best ourselves
-                    overlapFactor: 0.999       // almost continuous
+                    probabilityThreshold: 0, // allow all, we pick the best ourselves
+                    overlapFactor: 0.999 // almost continuous
                 });
 
                 setTimeout(() => {
                     recognizer.stopListening();
                     resolve();
                 }, 1500);
-            } catch (e) {
-                try { recognizer.stopListening(); } catch (_) {}
-                reject(e);
+            } catch (_e) {
+                try {
+                    recognizer.stopListening();
+                } catch (_err) {
+                    void _err;
+                }
+                reject(_e);
             }
         });
 
@@ -884,15 +915,15 @@ class Scratch3TensorFlowBlocks {
         return this.lastPrediction.audioTM;
     }
 
-    async startAudioTM() {
+    async startAudioTM () {
         await this._ensureTFReady();
         const recognizer = this.models.audio.tmModel;
         if (!recognizer) {
-            swal(translate._getText('audio_tm_model_not_loaded', this.locale));
+            swal(globalThis.translate._getText('audio_tm_model_not_loaded', this.locale));
             return;
         }
         if (this._tmAudioListening) {
-            swal(translate._getText('audio_tm_already_running', this.locale));
+            swal(globalThis.translate._getText('audio_tm_already_running', this.locale));
             return;
         }
 
@@ -913,38 +944,42 @@ class Scratch3TensorFlowBlocks {
                 probabilityThreshold: 0,
                 overlapFactor: 0.999
             });
-            swal(translate._getText('audio_tm_recognition_started', this.locale));
-        } catch (e) {
-            console.error('Audio TM listen error:', e);
+            swal(globalThis.translate._getText('audio_tm_recognition_started', this.locale));
+        } catch (_err) {
+            void _err;
             this._tmAudioListening = false;
-            swal(translate._getText('audio_tm_recognition_failed', this.locale));
+            swal(globalThis.translate._getText('audio_tm_recognition_failed', this.locale));
         }
     }
 
-    stopAudioTM() {
+    stopAudioTM () {
         if (this._tmAudioListening && this.models.audio?.tmModel) {
-            try { this.models.audio.tmModel.stopListening(); } catch (_) {}
+            try {
+                this.models.audio.tmModel.stopListening();
+            } catch (_err) {
+                void _err;
+            }
         }
         this._tmAudioListening = false;
-        swal(translate._getText('audio_tm_recognition_stopped', this.locale));
+        swal(globalThis.translate._getText('audio_tm_recognition_stopped', this.locale));
     }
 
-    getAudioTM() {
-        return this.lastPrediction.audioTM || translate._getText('no_recognition', this.locale);
+    getAudioTM () {
+        return this.lastPrediction.audioTM || globalThis.translate._getText('no_recognition', this.locale);
     }
-    getAudioTMClass() {
+    getAudioTMClass () {
         return this.lastPredictionDetails.audioTM.className || '';
     }
-    getAudioTMProbability() {
+    getAudioTMProbability () {
         const p = this.lastPredictionDetails.audioTM.probability;
         return p ? Number((p * 100).toFixed(1)) : 0;
     }
 
     // ===== Audio-Level Monitor =====
-    async _startAudioLevelMonitor() {
+    async _startAudioLevelMonitor () {
         if (this._audioMonitorActive) return;
         try {
-            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const stream = await navigator.mediaDevices.getUserMedia({audio: true});
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             const source = audioCtx.createMediaStreamSource(stream);
             const analyser = audioCtx.createAnalyser();
@@ -989,34 +1024,44 @@ class Scratch3TensorFlowBlocks {
                     const db = 20 * Math.log10(rms + 1e-8); // avoids log(0)
                     const norm = (db - this._audioDbMin) / (0 - this._audioDbMin);
                     this._audioLevelNormalized = Math.max(0, Math.min(1, norm));
-                } catch (_) {}
+                } catch (_err) {
+                    void _err;
+                }
                 this._audioRAF = requestAnimationFrame(loop);
             };
             this._audioRAF = requestAnimationFrame(loop);
-        } catch (e) {
-            console.error('Audio level monitor could not be started:', e);
-            swal(translate._getText('microphone_permission_check', this.locale));
+        } catch (_err) {
+            void _err;
+            swal(globalThis.translate._getText('microphone_permission_check', this.locale));
             this._audioMonitorActive = false;
         }
     }
 
-    async _ensureAudioMonitor() {
+    async _ensureAudioMonitor () {
         if (!this._audioMonitorActive) {
             await this._startAudioLevelMonitor();
         }
     }
 
-    _stopAudioLevelMonitor() {
+    _stopAudioLevelMonitor () {
         if (this._audioRAF) {
             cancelAnimationFrame(this._audioRAF);
             this._audioRAF = null;
         }
         if (this._audioStreamMon) {
-            try { this._audioStreamMon.getTracks().forEach(t => t.stop()); } catch (_) {}
+            try {
+                this._audioStreamMon.getTracks().forEach(t => t.stop());
+            } catch (_err) {
+                void _err;
+            }
             this._audioStreamMon = null;
         }
         if (this._audioCtx) {
-            try { this._audioCtx.close(); } catch (_) {}
+            try {
+                this._audioCtx.close();
+            } catch (_err) {
+                void _err;
+            }
             this._audioCtx = null;
         }
         this._audioAnalyser = null;
@@ -1027,17 +1072,17 @@ class Scratch3TensorFlowBlocks {
     }
 
     // Boolean Block: Audio level above threshold?
-    async isAudioAbove(args) {
+    async isAudioAbove (args) {
         const threshold = Math.max(0, Math.min(100, Number(args.THRESHOLD) || 0)); // 0..100
         await this._ensureAudioMonitor();
         // Compare percent
         const levelPercent = this._audioLevelNormalized * 100;
-        //console.log('Audio level:', levelPercent.toFixed(1), '% (Threshold:', threshold, '%)');
+        // console.log('Audio level:', levelPercent.toFixed(1), '% (Threshold:', threshold, '%)');
         return levelPercent >= threshold;
     }
 
     // === Pose – TensorFlow ===
-    async loadPoseTF() {
+    async loadPoseTF () {
         await this._ensureTFReady();
         const config = {
             modelType: posedetection.movenet.modelType.SINGLEPOSE_LIGHTNING
@@ -1049,13 +1094,13 @@ class Scratch3TensorFlowBlocks {
             posedetection.SupportedModels.MoveNet,
             config
         );
-        swal(translate._getText('pose_tf_model_loaded', this.locale));
+        swal(globalThis.translate._getText('pose_tf_model_loaded', this.locale));
     }
 
-    async startPoseTF() {
+    async startPoseTF () {
         await this._ensureTFReady();
         if (!this.models.pose.tfModel) {
-            swal(translate._getText('pose_tf_model_not_loaded', this.locale));
+            swal(globalThis.translate._getText('pose_tf_model_not_loaded', this.locale));
             return;
         }
 
@@ -1072,7 +1117,7 @@ class Scratch3TensorFlowBlocks {
         video.playsInline = true;
 
         try {
-            const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
+            const stream = await navigator.mediaDevices.getUserMedia({video: {facingMode: 'user'}});
             video.srcObject = stream;
             await new Promise(res => (video.onloadedmetadata = () => res()));
             await video.play();
@@ -1089,7 +1134,7 @@ class Scratch3TensorFlowBlocks {
                         this.poseTF.raw = pose;
                         // Filter by minimum score
                         this.poseTF.keypoints = (pose.keypoints || []).filter(k =>
-                            k.score === undefined || k.score >= this.poseTF.minScore
+                            typeof k.score !== 'number' || k.score >= this.poseTF.minScore
                         );
                     } else {
                         this.poseTF.raw = null;
@@ -1097,90 +1142,94 @@ class Scratch3TensorFlowBlocks {
                     }
                     // For backward compatibility:
                     this.lastPrediction.poseTF = String(this.poseTF.keypoints.length);
-                } catch (e) {
-                    console.error('Pose TF loop error:', e);
+                } catch (_err) {
+                    void _err;
                 }
                 this._tfPoseRAF = requestAnimationFrame(loop);
             };
 
             this._tfPoseRAF = requestAnimationFrame(loop);
-            swal(translate._getText('pose_tf_recognition_started', this.locale));
-        } catch (err) {
-            console.error('Camera could not be started:', err);
-            swal(translate._getText('camera_permission_check', this.locale));
+            swal(globalThis.translate._getText('pose_tf_recognition_started', this.locale));
+        } catch (_err) {
+            void _err;
+            swal(globalThis.translate._getText('camera_permission_check', this.locale));
         }
     }
 
-    stopPoseTF() {
+    stopPoseTF () {
         if (this._tfPoseRAF) {
             cancelAnimationFrame(this._tfPoseRAF);
             this._tfPoseRAF = null;
         }
         if (this._tfPoseStream) {
-            try { this._tfPoseStream.getTracks().forEach(t => t.stop()); } catch (_) {}
+            try {
+                this._tfPoseStream.getTracks().forEach(t => t.stop());
+            } catch (_err) {
+                void _err;
+            }
             this._tfPoseStream = null;
         }
         this._tfPoseVideo = null;
         this._updateStagePreview();
-        swal(translate._getText('pose_tf_recognition_stopped', this.locale));
+        swal(globalThis.translate._getText('pose_tf_recognition_stopped', this.locale));
     }
 
-    getPoseTF() {
+    getPoseTF () {
         return String(this.poseTF.keypoints.length);
     }
 
-    setPoseTFMinScore(args) {
+    setPoseTFMinScore (args) {
         const v = Number(args.SCORE);
         if (!isNaN(v)) this.poseTF.minScore = Math.max(0, Math.min(1, v));
     }
 
-    poseTFKeypointsCount() {
+    poseTFKeypointsCount () {
         return String(this.poseTF.keypoints.length);
     }
 
-    _findPoseTFKeypoint(name) {
+    _findPoseTFKeypoint (name) {
         if (!name) return null;
         return this.poseTF.keypoints.find(k => k.name === name) ||
                (this.poseTF.raw?.keypoints || []).find(k => k.name === name) ||
                null;
     }
 
-    poseTFKeypointX(args) {
+    poseTFKeypointX (args) {
         const kp = this._findPoseTFKeypoint(args.NAME);
         return kp ? Math.round(kp.x) : 0;
     }
 
-    poseTFKeypointY(args) {
+    poseTFKeypointY (args) {
         const kp = this._findPoseTFKeypoint(args.NAME);
         return kp ? Math.round(kp.y) : 0;
     }
 
-    poseTFKeypointScore(args) {
+    poseTFKeypointScore (args) {
         const kp = this._findPoseTFKeypoint(args.NAME);
         return kp && typeof kp.score === 'number' ? Number((kp.score * 100).toFixed(1)) : 0;
     }
 
-    poseTFHasKeypoint(args) {
+    poseTFHasKeypoint (args) {
         return !!this._findPoseTFKeypoint(args.NAME);
     }
 
-    getPoseTFRaw() {
+    getPoseTFRaw () {
         return this.poseTF.raw ? JSON.stringify(this.poseTF.raw) : '';
     }
 
     // === Pose – Teachable Machine ===
-    async loadPoseTM(args) {
+    async loadPoseTM (args) {
         await this._ensureTFReady();
-        const modelURL = args.URL + "model.json";
-        const metadataURL = args.URL + "metadata.json";
+        const modelURL = `${args.URL}model.json`;
+        const metadataURL = `${args.URL}metadata.json`;
         this.models.pose.tmModel = await tmPose.load(modelURL, metadataURL);
-        swal(translate._getText('pose_tm_model_loaded', this.locale));
+        swal(globalThis.translate._getText('pose_tm_model_loaded', this.locale));
     }
 
-    async startPoseTM() {
+    async startPoseTM () {
         await this._ensureTFReady();
         if (!this.models.pose.tmModel) {
-            swal(translate._getText('pose_tm_model_not_loaded', this.locale));
+            swal(globalThis.translate._getText('pose_tm_model_not_loaded', this.locale));
             return;
         }
 
@@ -1195,7 +1244,7 @@ class Scratch3TensorFlowBlocks {
         video.autoplay = true;
         video.playsInline = true;
 
-        const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
+        const stream = await navigator.mediaDevices.getUserMedia({video: {facingMode: 'user'}});
         video.srcObject = stream;
         await new Promise(res => (video.onloadedmetadata = () => res()));
         await video.play();
@@ -1207,58 +1256,62 @@ class Scratch3TensorFlowBlocks {
         const loop = async () => {
             try {
                 // Important: first estimatePose, then predict with posenetOutput
-                const { pose, posenetOutput } = await model.estimatePose(video);
+                const {posenetOutput} = await model.estimatePose(video);
                 const prediction = await model.predict(posenetOutput);
 
-                const best = prediction.reduce((a, b) => (b.probability > a.probability ? b : a), { probability: 0 });
-                //this.lastPrediction.pose = JSON.stringify({
+                const best = prediction.reduce((a, b) => (b.probability > a.probability ? b : a), {probability: 0});
+                // this.lastPrediction.pose = JSON.stringify({
                 //    className: best.className,
                 //    probability: best.probability,
                 //    // optional: raw values, if needed
                 //    // prediction
-                //});
+                // });
                 this.lastPredictionDetails.poseTM.className = best.className;
                 this.lastPredictionDetails.poseTM.probability = best.probability;
                 this.lastPrediction.poseTM = `${best.className} (${(best.probability * 100).toFixed(1)}%)`;
-            } catch (e) {
-                console.error('Pose TM loop error:', e);
+            } catch (_err) {
+                void _err;
             }
             this._tmPoseRAF = requestAnimationFrame(loop);
         };
 
         this._tmPoseRAF = requestAnimationFrame(loop);
-        swal(translate._getText('pose_tm_recognition_started', this.locale));
+        swal(globalThis.translate._getText('pose_tm_recognition_started', this.locale));
     }
 
-    stopPoseTM() {
+    stopPoseTM () {
         if (this._tmPoseRAF) {
             cancelAnimationFrame(this._tmPoseRAF);
             this._tmPoseRAF = null;
         }
         if (this._tmPoseStream) {
-            try { this._tmPoseStream.getTracks().forEach(t => t.stop()); } catch (_) {}
+            try {
+                this._tmPoseStream.getTracks().forEach(t => t.stop());
+            } catch (_err) {
+                void _err;
+            }
             this._tmPoseStream = null;
         }
         this._tmPoseVideo = null;
         this._updateStagePreview();
-        swal(translate._getText('pose_tm_recognition_stopped', this.locale));
+        swal(globalThis.translate._getText('pose_tm_recognition_stopped', this.locale));
     }
 
-    async getPoseTM() {
-        return this.lastPrediction.poseTM || translate._getText('no_recognition', this.locale);
+    getPoseTM () {
+        return this.lastPrediction.poseTM || globalThis.translate._getText('no_recognition', this.locale);
     }
 
-    getPoseTMClass() {
+    getPoseTMClass () {
         return this.lastPredictionDetails.poseTM.className || '';
     }
 
-    getPoseTMProbability() {
+    getPoseTMProbability () {
         const p = this.lastPredictionDetails.poseTM.probability;
         return p ? Number((p * 100).toFixed(1)) : 0;
     }
 
-    reset() {
-        //console.log('TensorFlow extension reset');
+    reset () {
+        // console.log('TensorFlow extension reset');
         // Image TM Loop stop and release camera
         if (this._tmImageRAF) {
             cancelAnimationFrame(this._tmImageRAF);
@@ -1307,13 +1360,21 @@ class Scratch3TensorFlowBlocks {
 
         // Audio TF stop
         if (this._tfAudioListening && this.models.audio?.tfModel) {
-            try { this.models.audio.tfModel.stopListening(); } catch (_) {}
+            try {
+                this.models.audio.tfModel.stopListening();
+            } catch (_err) {
+                void _err;
+            }
         }
         this._tfAudioListening = false;
 
         // Audio TM stop
         if (this._tmAudioListening && this.models.audio?.tmModel) {
-            try { this.models.audio.tmModel.stopListening(); } catch (_) {}
+            try {
+                this.models.audio.tmModel.stopListening();
+            } catch (_err) {
+                void _err;
+            }
         }
         this._tmAudioListening = false;
 
@@ -1323,7 +1384,9 @@ class Scratch3TensorFlowBlocks {
         // Dispose pose detector if necessary
         try {
             this.models.pose?.tfModel?.dispose?.();
-        } catch (_) {}
+        } catch (_err) {
+            void _err;
+        }
 
         // Stop shared camera
         this._stopSharedCamera();

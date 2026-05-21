@@ -59,7 +59,7 @@ const webBuilder = new ScratchWebpackConfigBuilder(common)
 
 // Let webpack handle common static assets (SVG, images, audio) as assets
 webBuilder.addModuleRule({
-    test: /\.(svg|png|wav|mp3|gif|jpg)$/, 
+    test: /\.(svg|png|wav|mp3|gif|jpg)$/,
     resourceQuery: /^$/, // reject any query string
     type: 'asset'
 });
