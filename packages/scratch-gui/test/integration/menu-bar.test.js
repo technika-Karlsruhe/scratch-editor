@@ -10,7 +10,8 @@ const {
     loadUri,
     rightClickText,
     scope,
-    scopeForCategoryId
+    scopeForCategoryId,
+    textExists
 } = new SeleniumHelper();
 
 const uri = path.resolve(__dirname, '../../build/index.html');
@@ -51,7 +52,10 @@ describe('Menu bar settings', () => {
 
     test('Share button should NOT be enabled', async () => {
         await loadUri(uri);
-        await findByXpath('//div[button[div[span[text()="Share"]]] and @data-tip="tooltip"]');
+        // The UI no longer shows a "Coming Soon" tooltip for disabled features.
+        // Instead assert that a Share label is not present in the menu bar when sharing is disabled.
+        const exists = await textExists('Share', scope.menuBar);
+        expect(exists).toBe(false);
     });
 
     test('Logo should be clickable', async () => {
