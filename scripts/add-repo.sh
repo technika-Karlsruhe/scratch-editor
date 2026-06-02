@@ -519,6 +519,13 @@ else
     fi
 fi
 
+# 6a. Refresh the new package's LICENSE/TRADEMARK from the monorepo root so it
+# matches every other workspace. Runs after step 6 because update-legal
+# resolves the target via `npm query .workspace`, which needs the new entry
+# to already be in the root workspaces array.
+echo "==> Refreshing LICENSE/TRADEMARK from monorepo root..."
+npm run update-legal -- "${NPM_ORGANIZATION}/${REPO_NAME}"
+
 # 7. Rewire inter-package dependencies across all packages.
 echo "==> Rewiring inter-package dependencies..."
 
@@ -666,8 +673,14 @@ if [ ${#MATCHING_FILES[@]} -gt 0 ]; then
 fi
 
 # 8. Normalize the lockfile after all the dep changes.
+#
+# Lockfile generation deliberately does not use --prefer-offline: that step is
+# discovering which versions to resolve to, and a cached packument predating a
+# freshly published transitive dep will trip ETARGET on a range npm could
+# satisfy from the registry. The follow-up install can keep --prefer-offline
+# because the lockfile pins concrete tarballs by then.
 echo "==> Normalizing package-lock.json..."
-npm install --package-lock-only --prefer-offline --no-audit --no-fund
+npm install --package-lock-only --no-audit --no-fund
 npm install --prefer-offline --no-audit --no-fund
 
 # 9. Commit the integration fixups as one cumulative commit.
@@ -678,6 +691,7 @@ if ! git diff --cached --quiet; then
 
 - Renamed package to ${NPM_ORGANIZATION}/${REPO_NAME}
 - Removed standalone-repo metadata (CI/release configs, hooks, repo-level dotfiles)
+- Refreshed LICENSE/TRADEMARK from monorepo root
 - Rewired inter-package dependencies to use workspace versions
 - Added to root workspaces list
 - Regenerated package-lock.json"
