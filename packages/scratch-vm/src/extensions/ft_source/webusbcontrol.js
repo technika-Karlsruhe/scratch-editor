@@ -303,6 +303,103 @@ class LT{
     }
 }
 
+class IOExt{
+    constructor (runtime) {
+        /**
+         * The runtime instantiating this block package.
+         * @type {Runtime}
+         */
+        this.runtime = runtime;
+        translate.setup(); // setup translation
+        this.prevState = {byte1: 0x00, byte2: 0x00, byte3: 0x00};
+    }
+    configuration = 1;
+    interface = 0;
+    vendorId = 0x146A;
+    productId = 0x0002;
+    name = 'fischertechnik Robo I/O-Extension (Knobloch GmbH)'; // name for USB connection
+    writeresponse = 11;
+    indIn = 8; // Number of Inputs
+    inLength = 11;
+    indServo = 0;
+    indOut = 12; // Number of outputs
+    indSum = 10; // Sum of all characteristics which are permanently accessed (not LED)
+
+    async readInput (result) {
+        const data = new Uint8Array(result.data.buffer, result.data.byteOffset, result.data.byteLength);
+        if (data.length < 1) return;
+
+        const digitalInputs = data[0];
+        for (let input = 0; input < this.indIn; input++) {
+            const digitalValue = (digitalInputs >> input) & 0x01;
+            valIn[this.indOut + input] = digitalValue ? 0 : 255;
+        }
+    }
+
+    readfunc (){
+        connecteddevice.transferIn(inEndpoint, this.inLength)
+            .then(result => this.readInput(result))
+            .then(() => {
+                charZust = 0;
+                success = true;
+            })
+            .catch(error => {
+                charZust = 0;
+                console.error('Error reading I/O-Extension inputs:', error);
+            });
+    }
+
+    getwriteOut (ind, val){
+        if (ind < 0 || ind >= this.indOut) {
+            throw new Error('I/O-Extension output index is outside the valid range.');
+        }
+
+        let {byte1, byte2, byte3} = this.prevState;
+        const speedMagnitude = Math.round(Math.min(127, Math.abs(val)) / 127 * 15);
+
+        if (ind < 4) { // M1-M4
+            const directionBits = [1 << (ind * 2), 1 << (ind * 2 + 1)];
+            const speedByte = ind < 2 ? byte2 : byte3;
+            const speedShift = (ind % 2) * 4;
+            const speedMask = 0x0F << speedShift;
+            const encodedSpeed = speedMagnitude << speedShift;
+            if (val > 0) {
+                byte1 = (byte1 | directionBits[1]) & ~directionBits[0];
+                if (ind < 2) byte2 = (speedByte & ~speedMask) | encodedSpeed;
+                else byte3 = (speedByte & ~speedMask) | encodedSpeed;
+            } else if (val < 0) {
+                byte1 = (byte1 | directionBits[0]) & ~directionBits[1];
+                if (ind < 2) byte2 = (speedByte & ~speedMask) | encodedSpeed;
+                else byte3 = (speedByte & ~speedMask) | encodedSpeed;
+            } else {
+                byte1 &= ~(directionBits[0] | directionBits[1]);
+                if (ind < 2) byte2 &= ~speedMask;
+                else byte3 &= ~speedMask;
+            }
+        } else {
+            const outputIndex = ind - 4;
+            const mask = 1 << (outputIndex % 8);
+            byte1 = val > 0 ? byte1 | mask : byte1 & ~mask;
+            if (outputIndex % 4 < 2) byte2 = val > 0 ? speedMagnitude : 0;
+            else byte3 = val > 0 ? speedMagnitude : 0;
+        }
+
+        this.prevState = {byte1, byte2, byte3};
+        return new Uint8Array([0xF2, byte1, byte2, byte3, 0x00, 0x00]);
+    }
+
+    getwriteInMode (ind, val){
+        if (ind < 0 || ind >= this.indIn) {
+            throw new Error('I/O-Extension input index is outside the valid range.');
+        }
+        return new Uint8Array([0xF3, ind, val, 0x00, 0x00, 0x00]);
+    }
+
+    getwriteLED (val){
+        return new Uint8Array([0xF5, val || 0, 0x00, 0x00, 0x00, 0x00]);
+    }
+}
+
 class ftduino{
     constructor (runtime) {
         /**
@@ -984,6 +1081,9 @@ class WebUSBDevice{
         case 'RX':
             type = new RX();
             break;
+        case 'IOExt':
+            type = new IOExt();
+            break;
         }
         return connect = new Promise((resolve, reject) => {
             const filter = [{vendorId: type.vendorId, productId: type.productId}];
@@ -1042,6 +1142,7 @@ class WebUSBDevice{
                     }
                     charZust = 0;
                     read = 0;
+                    console.log('Initializing variables');
                     for (var i = 0; i < (type.indOut + type.indIn + type.indServo + type.indOut / 3); i = i + 1){ // set all varibles
                         inputchange[i] = [];
                         inputchange[i][0] = 0;
@@ -1131,6 +1232,7 @@ class WebUSBDevice{
                     buttonpressed = false;
                     this.connected = true;
                     resolve(connecteddevice);
+                    console.log('Device connected and initialized');
                 })
                 .catch(error => {
                     reject(error);

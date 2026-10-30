@@ -9,6 +9,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'digitale Spannung',
         fr: 'tension numérique',
         es: 'voltaje digital',
+        'pt-br': 'tensão digital',
         ko: '디지털 전압'
     },
     Digitalresistance: {
@@ -16,6 +17,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'digitaler Widerstand',
         fr: 'résistance numérique',
         es: 'resistencia digital',
+        'pt-br': 'resistência digital',
         ko: '디지털 저항'
     },
     Analoguevoltage: {
@@ -23,6 +25,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'analoge Spannung',
         fr: 'tension analogique',
         es: 'voltaje analógico',
+        'pt-br': 'tensão analógica',
         ko: '아날로그 전압'
     },
     Analogueresistance: {
@@ -30,6 +33,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'analoger Widerstand',
         fr: 'résistance analogique',
         es: 'resistencia analógica',
+        'pt-br': 'resistência analógica',
         ko: '아날로그 저항'
     },
     Ultrasonic: {
@@ -37,6 +41,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Ultraschall',
         fr: 'ultrasons',
         es: 'ultrasónico',
+        'pt-br': 'Ultrassônico',
         ko: '초음파'
     },
     ColorSensor: {
@@ -44,6 +49,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Farbsensor',
         fr: 'capteur de couleur',
         es: 'sensor de color',
+        'pt-br': 'sensor de cor',
         ko: '컬러 센서'
     },
     DistanceSensor: {
@@ -51,6 +57,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Abstandssensor',
         fr: 'capteur de distance',
         es: 'sensor de distancia',
+        'pt-br': 'sensor de distância',
         ko: '거리 센서'
     },
     NTCResistor: {
@@ -58,13 +65,15 @@ const message = { // translations en/de/fr/es/ko
         de: 'NTC Widerstand',
         fr: 'résistance NTC',
         es: 'resistor NTC',
+        'pt-br': 'resistor NTC',
         ko: 'NTC 저항'
     },
     PhotoResistor: {
         en: 'photo resistor',
         de: 'Fotowiderstand',
         fr: 'photorésistance',
-        es: 'fotorresistor',
+        es: 'fotoresistor',
+        'pt-br': 'fotorresistor',
         ko: '광저항'
     },
     Button: {
@@ -72,13 +81,15 @@ const message = { // translations en/de/fr/es/ko
         de: 'Taster',
         fr: 'bouton',
         es: 'botón',
+        'pt-br': 'botão',
         ko: '버튼'
     },
     Lightbarrier: {
         en: 'lightbarrier',
         de: 'Lichtschranke',
         fr: 'barrière lumineuse',
-        es: 'barrera de luz',
+        es: 'Barrera de la luz',
+        'pt-br': 'barreira de luz',
         ko: '광차단기'
     },
     Reedcontact: {
@@ -86,13 +97,15 @@ const message = { // translations en/de/fr/es/ko
         de: 'Reedkontakt',
         fr: 'contact à lames souples (reed)',
         es: 'contacto reed',
+        'pt-br': 'contato reed',
         ko: '리드 접점'
     },
     TrailSensor: {
         en: 'trail sensor',
         de: 'Spursensor',
         fr: 'capteur de piste',
-        es: 'sensor de rastro',
+        es: 'Sensor de linea',
+        'pt-br': 'sensor de linha',
         ko: '트레일 센서'
     },
     Open: {
@@ -100,6 +113,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'öffnet',
         fr: 'ouvre',
         es: 'abre',
+        'pt-br': 'abre',
         ko: '열림'
     },
     Closed: {
@@ -107,6 +121,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'schließt',
         fr: 'ferme',
         es: 'cierra',
+        'pt-br': 'fecha',
         ko: '닫힘'
     },
     Forward: {
@@ -114,6 +129,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Vorwärts',
         fr: 'avant',
         es: 'adelante',
+        'pt-br': 'para frente',
         ko: '앞으로'
     },
     Backwards: {
@@ -121,6 +137,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Rückwärts',
         fr: 'arrière',
         es: 'atrás',
+        'pt-br': 'para trás',
         ko: '뒤로'
     },
     yes: {
@@ -128,6 +145,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'ja',
         fr: 'oui',
         es: 'sí',
+        'pt-br': 'sim',
         ko: '예'
     },
     no: {
@@ -135,13 +153,15 @@ const message = { // translations en/de/fr/es/ko
         de: 'nein',
         fr: 'non',
         es: 'no',
+        'pt-br': 'não',
         ko: '아니오'
     },
     on: {
         en: 'on',
         de: 'an',
         fr: 'activé',
-        es: 'encendido',
+        es: 'activado',
+        'pt-br': 'ligado',
         ko: '켜짐'
     },
     off: {
@@ -149,6 +169,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'aus',
         fr: 'éteint',
         es: 'apagado',
+        'pt-br': 'desligado',
         ko: '꺼짐'
     },
     blue: {
@@ -156,6 +177,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'blau',
         fr: 'bleu',
         es: 'azul',
+        'pt-br': 'azul',
         ko: '파랑'
     },
     orange: {
@@ -163,6 +185,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'orange',
         fr: 'orange',
         es: 'naranja',
+        'pt-br': 'laranja',
         ko: '주황'
     },
     kp_nose: {
@@ -170,6 +193,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Nase',
         fr: 'nez',
         es: 'nariz',
+        'pt-br': 'nariz',
         ko: '코'
     },
     kp_left_eye: {
@@ -177,6 +201,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'linkes Auge',
         fr: 'œil gauche',
         es: 'ojo izquierdo',
+        'pt-br': 'olho esquerdo',
         ko: '왼쪽 눈'
     },
     kp_right_eye: {
@@ -184,6 +209,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'rechtes Auge',
         fr: 'œil droit',
         es: 'ojo derecho',
+        'pt-br': 'olho direito',
         ko: '오른쪽 눈'
     },
     kp_left_ear: {
@@ -191,6 +217,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'linkes Ohr',
         fr: 'oreille gauche',
         es: 'oreja izquierda',
+        'pt-br': 'orelha esquerda',
         ko: '왼쪽 귀'
     },
     kp_right_ear: {
@@ -198,6 +225,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'rechtes Ohr',
         fr: 'oreille droite',
         es: 'oreja derecha',
+        'pt-br': 'orelha direita',
         ko: '오른쪽 귀'
     },
     kp_left_shoulder: {
@@ -205,6 +233,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'linke Schulter',
         fr: 'épaule gauche',
         es: 'hombro izquierdo',
+        'pt-br': 'ombro esquerdo',
         ko: '왼쪽 어깨'
     },
     kp_right_shoulder: {
@@ -212,6 +241,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'rechte Schulter',
         fr: 'épaule droite',
         es: 'hombro derecho',
+        'pt-br': 'ombro direito',
         ko: '오른쪽 어깨'
     },
     kp_left_elbow: {
@@ -219,6 +249,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'linker Ellbogen',
         fr: 'coude gauche',
         es: 'codo izquierdo',
+        'pt-br': 'cotovelo esquerdo',
         ko: '왼쪽 팔꿈치'
     },
     kp_right_elbow: {
@@ -226,6 +257,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'rechter Ellbogen',
         fr: 'coude droit',
         es: 'codo derecho',
+        'pt-br': 'cotovelo direito',
         ko: '오른쪽 팔꿈치'
     },
     kp_left_wrist: {
@@ -233,6 +265,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'linkes Handgelenk',
         fr: 'poignet gauche',
         es: 'muñeca izquierda',
+        'pt-br': 'pulso esquerdo',
         ko: '왼쪽 손목'
     },
     kp_right_wrist: {
@@ -240,6 +273,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'rechtes Handgelenk',
         fr: 'poignet droit',
         es: 'muñeca derecha',
+        'pt-br': 'pulso direito',
         ko: '오른쪽 손목'
     },
     kp_left_hip: {
@@ -247,6 +281,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'linke Hüfte',
         fr: 'hanche gauche',
         es: 'cadera izquierda',
+        'pt-br': 'quadril esquerdo',
         ko: '왼쪽 엉덩이'
     },
     kp_right_hip: {
@@ -254,6 +289,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'rechte Hüfte',
         fr: 'hanche droite',
         es: 'cadera derecha',
+        'pt-br': 'quadril direito',
         ko: '오른쪽 엉덩이'
     },
     kp_left_knee: {
@@ -261,6 +297,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'linkes Knie',
         fr: 'genou gauche',
         es: 'rodilla izquierda',
+        'pt-br': 'joelho esquerdo',
         ko: '왼쪽 무릎'
     },
     kp_right_knee: {
@@ -268,6 +305,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'rechtes Knie',
         fr: 'genou droit',
         es: 'rodilla derecha',
+        'pt-br': 'joelho direito',
         ko: '오른쪽 무릎'
     },
     kp_left_ankle: {
@@ -275,6 +313,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'linker Knöchel',
         fr: 'cheville gauche',
         es: 'tobillo izquierdo',
+        'pt-br': 'tornozelo esquerdo',
         ko: '왼쪽 발목'
     },
     kp_right_ankle: {
@@ -282,6 +321,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'rechter Knöchel',
         fr: 'cheville droite',
         es: 'tobillo derecho',
+        'pt-br': 'tornozelo direito',
         ko: '오른쪽 발목'
     },
 
@@ -291,6 +331,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Wenn [SENSOR] [INPUT] [OPENCLOSE]',
         fr: 'Si [SENSOR] [INPUT] [OPENCLOSE]',
         es: 'Si [SENSOR] [INPUT] [OPENCLOSE]',
+        'pt-br': 'Se [SENSOR] [INPUT] [OPENCLOSE]',
         ko: '[SENSOR] [INPUT] [OPENCLOSE]이면'
     },
     onInput: {
@@ -298,6 +339,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Wenn der Wert [SENSOR] [INPUT] [OPERATOR] [VALUE]',
         fr: 'Si la valeur de [SENSOR] [INPUT] [OPERATOR] [VALUE]',
         es: 'Si el valor de [SENSOR] [INPUT] [OPERATOR] [VALUE]',
+        'pt-br': 'Se o valor de [SENSOR] [INPUT] [OPERATOR] [VALUE]',
         ko: '[SENSOR] [INPUT] 값이 [OPERATOR] [VALUE]이면'
     },
     getSensor: {
@@ -305,6 +347,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Lese Wert von [SENSOR] [INPUT]',
         fr: 'Lire la valeur de [SENSOR] [INPUT]',
         es: 'Leer el valor de [SENSOR] [INPUT]',
+        'pt-br': 'Ler valor de [SENSOR] [INPUT]',
         ko: '[SENSOR] [INPUT] 값 읽기'
     },
     isClosed: {
@@ -312,6 +355,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Ist [SENSOR] [INPUT] geschlossen?',
         fr: 'Est-ce que [SENSOR] [INPUT] est fermé ?',
         es: '¿Está [SENSOR] [INPUT] cerrado?',
+        'pt-br': '[SENSOR] [INPUT] está fechado?',
         ko: '[SENSOR] [INPUT]이(가) 닫혔습니까?'
     },
     doSetLamp: {
@@ -319,6 +363,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Setze Lampe [OUTPUT] auf [NUM]',
         fr: 'Mettre la lampe [OUTPUT] à [NUM]',
         es: 'Poner la lámpara [OUTPUT] a [NUM]',
+        'pt-br': 'Definir lâmpada [OUTPUT] como [NUM]',
         ko: '램프 [OUTPUT]을(를) [NUM]로 설정'
     },
     doSetOutput: {
@@ -326,6 +371,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Setze Ausgang [OUTPUT] auf [NUM]',
         fr: 'Mettre la sortie [OUTPUT] à [NUM]',
         es: 'Poner la salida [OUTPUT] a [NUM]',
+        'pt-br': 'Definir saída [OUTPUT] como [NUM]',
         ko: '출력 [OUTPUT]을(를) [NUM]로 설정'
     },
     doConfigureInput: {
@@ -333,6 +379,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Setze Eingang [INPUT] auf [MODE]',
         fr: 'Configurer l’entrée [INPUT] en [MODE]',
         es: 'Configurar la entrada [INPUT] en [MODE]',
+        'pt-br': 'Definir entrada [INPUT] como [MODE]',
         ko: '입력 [INPUT]을(를) [MODE]로 설정'
     },
     doSetMotorSpeed: {
@@ -340,6 +387,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Setze Motor [MOTOR_ID] auf [SPEED]',
         fr: 'Mettre le moteur [MOTOR_ID] à [SPEED]',
         es: 'Poner el motor [MOTOR_ID] a [SPEED]',
+        'pt-br': 'Definir motor [MOTOR_ID] como [SPEED]',
         ko: '모터 [MOTOR_ID]을(를) [SPEED]로 설정'
     },
     doSetMotorSpeedDir: {
@@ -347,6 +395,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Setze Motor [MOTOR_ID] auf [SPEED] [DIRECTION]',
         fr: 'Mettre le moteur [MOTOR_ID] à [SPEED] [DIRECTION]',
         es: 'Poner el motor [MOTOR_ID] a [SPEED] [DIRECTION]',
+        'pt-br': 'Definir motor [MOTOR_ID] como [SPEED] [DIRECTION]',
         ko: '모터 [MOTOR_ID]을(를) [SPEED] [DIRECTION]로 설정'
     },
     doSetMotorDir: {
@@ -354,6 +403,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Setze Motor [MOTOR_ID] auf [DIRECTION]',
         fr: 'Mettre le moteur [MOTOR_ID] à [DIRECTION]',
         es: 'Poner el motor [MOTOR_ID] a [DIRECTION]',
+        'pt-br': 'Definir motor [MOTOR_ID] como [DIRECTION]',
         ko: '모터 [MOTOR_ID]을(를) [DIRECTION]로 설정'
     },
     doStopMotor: {
@@ -361,6 +411,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Stoppe Motor [MOTOR_ID]',
         fr: 'Arrêter le moteur [MOTOR_ID]',
         es: 'Detener el motor [MOTOR_ID]',
+        'pt-br': 'Parar motor [MOTOR_ID]',
         ko: '모터 [MOTOR_ID] 정지'
     },
     doSetServoPosition: {
@@ -368,6 +419,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Setze Servo [SERVO_ID] auf [POSITION]',
         fr: 'Mettre le servo [SERVO_ID] à [POSITION]',
         es: 'Poner el servo [SERVO_ID] a [POSITION]',
+        'pt-br': 'Definir servo [SERVO_ID] como [POSITION]',
         ko: '서보 [SERVO_ID]을(를) [POSITION]로 설정'
     },
     onCounter: {
@@ -375,6 +427,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Wenn Zähler [COUNTER_ID] [OPERATOR] [VALUE]',
         fr: 'Si le compteur [COUNTER_ID] [OPERATOR] [VALUE]',
         es: 'Si el contador [COUNTER_ID] [OPERATOR] [VALUE]',
+        'pt-br': 'Se contador [COUNTER_ID] [OPERATOR] [VALUE]',
         ko: '카운터 [COUNTER_ID]이(가) [OPERATOR] [VALUE]이면'
     },
     getCounter: {
@@ -382,6 +435,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Lese Wert von Zähler [COUNTER_ID]',
         fr: 'Lire la valeur du compteur [COUNTER_ID]',
         es: 'Leer el valor del contador [COUNTER_ID]',
+        'pt-br': 'Obter valor do contador [COUNTER_ID]',
         ko: '카운터 [COUNTER_ID] 값 읽기'
     },
     isCounter: {
@@ -389,6 +443,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Ist Zähler [COUNTER_ID] [OPERATOR] [VALUE]',
         fr: 'Le compteur [COUNTER_ID] est-il [OPERATOR] [VALUE] ?',
         es: '¿El contador [COUNTER_ID] es [OPERATOR] [VALUE]?',
+        'pt-br': 'Contador [COUNTER_ID] é [OPERATOR] [VALUE]',
         ko: '카운터 [COUNTER_ID]이(가) [OPERATOR] [VALUE]입니까?'
     },
     doPlaySound: {
@@ -396,6 +451,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Spiele Sound [NUM]',
         fr: 'Jouer le son [NUM]',
         es: 'Reproducir sonido [NUM]',
+        'pt-br': 'Reproduzir som [NUM]',
         ko: '사운드 [NUM] 재생'
     },
     doPlaySoundWait: {
@@ -403,6 +459,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Spiele Sound [NUM] und warte',
         fr: 'Jouer le son [NUM] et attendre',
         es: 'Reproducir sonido [NUM] y esperar',
+        'pt-br': 'Reproduzir som [NUM] e esperar',
         ko: '사운드 [NUM] 재생 후 대기'
     },
     doPlaySound2: {
@@ -410,6 +467,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Spiele Sound [SOUND_ID] Wiederholen [LOOP]',
         fr: 'Jouer le son [SOUND_ID] en boucle [LOOP]',
         es: 'Reproducir sonido [SOUND_ID] en bucle [LOOP]',
+        'pt-br': 'Reproduzir som [SOUND_ID] repetir [LOOP]',
         ko: '사운드 [SOUND_ID] 반복 [LOOP] 재생'
     },
     doStopSound: {
@@ -417,6 +475,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Stoppe Sound',
         fr: 'Arrêter le son',
         es: 'Detener sonido',
+        'pt-br': 'Parar som',
         ko: '사운드 정지'
     },
     doResetCounter: {
@@ -424,6 +483,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Setze Zähler [COUNTER_ID] zurück',
         fr: 'Réinitialiser le compteur [COUNTER_ID]',
         es: 'Reiniciar contador [COUNTER_ID]',
+        'pt-br': 'Redefinir contador [COUNTER_ID]',
         ko: '카운터 [COUNTER_ID] 초기화'
     },
     doSetMotorSpeedDirDist: {
@@ -431,6 +491,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Bewege Motor [MOTOR_ID] um [STEPS] Schritte mit [SPEED] [DIRECTION]',
         fr: 'Déplacer le moteur [MOTOR_ID] de [STEPS] pas avec [SPEED] [DIRECTION]',
         es: 'Mover motor [MOTOR_ID] [STEPS] pasos con [SPEED] [DIRECTION]',
+        'pt-br': 'Mover motor [MOTOR_ID] [STEPS] passos com [SPEED] [DIRECTION]',
         ko: '모터 [MOTOR_ID]을(를) [SPEED] [DIRECTION]로 [STEPS] 스텝 이동'
     },
     doSetMotorSpeedDirSync: {
@@ -438,6 +499,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Bewege Motor [MOTOR_ID] [DIRECTION] und [MOTOR_ID2] [DIRECTION2] mit [SPEED]',
         fr: 'Déplacer le moteur [MOTOR_ID] [DIRECTION] et [MOTOR_ID2] [DIRECTION2] avec [SPEED]',
         es: 'Mover motor [MOTOR_ID] [DIRECTION] y [MOTOR_ID2] [DIRECTION2] con [SPEED]',
+        'pt-br': 'Mover motor [MOTOR_ID] [DIRECTION] e [MOTOR_ID2] [DIRECTION2] com [SPEED]',
         ko: '모터 [MOTOR_ID] [DIRECTION] 및 [MOTOR_ID2] [DIRECTION2]을(를) [SPEED]로 이동'
     },
     doSetMotorSpeedDirDistSync: {
@@ -445,6 +507,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Bewege Motor [MOTOR_ID] [DIRECTION] und [MOTOR_ID2] [DIRECTION2] um [STEPS] Schritte mit [SPEED]',
         fr: 'Déplacer le moteur [MOTOR_ID] [DIRECTION] et [MOTOR_ID2] [DIRECTION2] de [STEPS] pas avec [SPEED]',
         es: 'Mover motor [MOTOR_ID] [DIRECTION] y [MOTOR_ID2] [DIRECTION2] [STEPS] pasos con [SPEED]',
+        'pt-br': 'Mover motor [MOTOR_ID] [DIRECTION] e [MOTOR_ID2] [DIRECTION2] [STEPS] passos com [SPEED]',
         ko: '모터 [MOTOR_ID] [DIRECTION] 및 [MOTOR_ID2] [DIRECTION2]을(를) [SPEED]로 [STEPS] 스텝 이동'
     },
     doStopMotorAndReset: {
@@ -452,6 +515,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Setze [MOTOR_ID] zurück',
         fr: 'Réinitialiser [MOTOR_ID]',
         es: 'Reiniciar [MOTOR_ID]',
+        'pt-br': 'Redefinir [MOTOR_ID]',
         ko: '[MOTOR_ID] 초기화'
     },
     setLed: {
@@ -459,6 +523,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Setze LED [STATE]',
         fr: 'Mettre la LED [STATE]',
         es: 'Poner LED [STATE]',
+        'pt-br': 'Definir LED [STATE]',
         ko: 'LED [STATE]로 설정'
     },
     loadImageTF: {
@@ -466,6 +531,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'lade Bild Modell (TensorFlow)',
         fr: 'charger le modèle d’image (TensorFlow)',
         es: 'cargar modelo de imagen (TensorFlow)',
+        'pt-br': 'Carregar modelo de imagem (TensorFlow)',
         ko: '이미지 모델 로드 (TensorFlow)'
     },
     classifyImageTF: {
@@ -473,6 +539,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'erkenne Objekt in Bild via TF [URL]',
         fr: 'classer l’objet dans l’image via TF [URL]',
         es: 'clasificar objeto en imagen vía TF [URL]',
+        'pt-br': 'Classificar objeto na imagem via TF [URL]',
         ko: 'TF를 통해 이미지에서 객체 분류 [URL]'
     },
     startImageTF: {
@@ -480,6 +547,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'starte Bild Erkennung (Kamera) via TF',
         fr: 'démarrer la reconnaissance d’image (caméra) via TF',
         es: 'iniciar reconocimiento de imagen (cámara) vía TF',
+        'pt-br': 'Iniciar reconhecimento de imagem (câmera) via TF',
         ko: 'TF를 통해 이미지 인식 시작 (카메라)'
     },
     stopImageTF: {
@@ -487,6 +555,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'stoppe Bild Erkennung via TF',
         fr: 'arrêter la reconnaissance d’image via TF',
         es: 'detener el reconocimiento de imagen vía TF',
+        'pt-br': 'Parar reconhecimento de imagem via TF',
         ko: 'TF를 통해 이미지 인식 중지'
     },
     getImageTF: {
@@ -494,6 +563,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'letzte Bild Erkennung via TF',
         fr: 'dernière reconnaissance d’image via TF',
         es: 'último reconocimiento de imagen vía TF',
+        'pt-br': 'Último reconhecimento de imagem via TF',
         ko: 'TF를 통해 마지막 이미지 인식'
     },
     getImageTFClass: {
@@ -501,6 +571,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Bild TF Klasse',
         fr: 'classe TF d’image',
         es: 'clase de imagen TF',
+        'pt-br': 'Classe da imagem TF',
         ko: '이미지 TF 클래스'
     },
     getImageTFProbability: {
@@ -508,6 +579,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Bild TF Wahrscheinlichkeit',
         fr: 'probabilité TF d’image',
         es: 'probabilidad de imagen TF',
+        'pt-br': 'Probabilidade da imagem TF',
         ko: '이미지 TF 확률'
     },
     loadImageTM: {
@@ -515,6 +587,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'lade Bild Modell (Teachable Machine) von [URL]',
         fr: 'charger le modèle d’image (Teachable Machine) depuis [URL]',
         es: 'cargar modelo de imagen (Teachable Machine) desde [URL]',
+        'pt-br': 'Carregar modelo de imagem (Teachable Machine) de [URL]',
         ko: '이미지 모델 로드 (Teachable Machine) [URL]에서'
     },
     classifyImageTM: {
@@ -522,6 +595,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'erkenne Objekt in Bild via TM [URL]',
         fr: 'classer l’objet dans l’image via TM [URL]',
         es: 'clasificar objeto en imagen vía TM [URL]',
+        'pt-br': 'Classificar objeto na imagem via TM [URL]',
         ko: 'TM를 통해 이미지에서 객체 분류 [URL]'
     },
     startImageTM: {
@@ -529,6 +603,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'starte Bild Erkennung (Kamera) via TM',
         fr: 'démarrer la reconnaissance d’image (caméra) via TM',
         es: 'iniciar reconocimiento de imagen (cámara) vía TM',
+        'pt-br': 'Iniciar reconhecimento de imagem (câmera) via TM',
         ko: 'TM를 통해 이미지 인식 시작 (카메라)'
     },
     stopImageTM: {
@@ -536,6 +611,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'stoppe Bild Erkennung via TM',
         fr: 'arrêter la reconnaissance d’image via TM',
         es: 'detener el reconocimiento de imagen vía TM',
+        'pt-br': 'Parar reconhecimento de imagem via TM',
         ko: 'TM를 통해 이미지 인식 중지'
     },
     getImageTM: {
@@ -543,6 +619,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'letzte Bild Erkennung via TM',
         fr: 'dernière reconnaissance d’image via TM',
         es: 'último reconocimiento de imagen vía TM',
+        'pt-br': 'Último reconhecimento de imagem via TM',
         ko: 'TM를 통해 마지막 이미지 인식'
     },
     getImageTMClass: {
@@ -550,6 +627,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Bild TM Klasse',
         fr: 'classe TM d’image',
         es: 'clase de imagen TM',
+        'pt-br': 'Classe da imagem TM',
         ko: '이미지 TM 클래스'
     },
     getImageTMProbability: {
@@ -557,6 +635,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Bild TM Wahrscheinlichkeit',
         fr: 'probabilité TM d’image',
         es: 'probabilidad de imagen TM',
+        'pt-br': 'Probabilidade da imagem TM',
         ko: '이미지 TM 확률'
     },
     loadAudioTF: {
@@ -564,6 +643,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'lade Audio Modell (TensorFlow)',
         fr: 'charger le modèle audio (TensorFlow)',
         es: 'cargar modelo de audio (TensorFlow)',
+        'pt-br': 'Carregar modelo de áudio (TensorFlow)',
         ko: '오디오 모델 로드 (TensorFlow)'
     },
     classifyAudioTF: {
@@ -571,6 +651,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'erkenne Ton via TF (Mikrofon)',
         fr: 'classer le son via TF (microphone)',
         es: 'clasificar sonido vía TF (micrófono)',
+        'pt-br': 'Classificar som via TF (microfone)',
         ko: 'TF를 통해 사운드 분류 (마이크)'
     },
     startAudioTF: {
@@ -578,6 +659,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'starte Audio Erkennung via TF',
         fr: 'démarrer la reconnaissance audio via TF',
         es: 'iniciar reconocimiento de audio vía TF',
+        'pt-br': 'Iniciar reconhecimento de áudio via TF',
         ko: 'TF를 통해 오디오 인식 시작'
     },
     stopAudioTF: {
@@ -585,6 +667,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'stoppe Audio Erkennung via TF',
         fr: 'arrêter la reconnaissance audio via TF',
         es: 'detener el reconocimiento de audio vía TF',
+        'pt-br': 'Parar reconhecimento de áudio via TF',
         ko: 'TF를 통해 오디오 인식 중지'
     },
     getAudioTF: {
@@ -592,6 +675,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'letzte Audio Erkennung via TF',
         fr: 'dernière reconnaissance audio via TF',
         es: 'último reconocimiento de audio vía TF',
+        'pt-br': 'Último reconhecimento de áudio via TF',
         ko: 'TF를 통해 마지막 오디오 인식'
     },
     getAudioTFClass: {
@@ -599,6 +683,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Audio TF Klasse',
         fr: 'classe TF audio',
         es: 'clase de audio TF',
+        'pt-br': 'Classe do áudio TF',
         ko: '오디오 TF 클래스'
     },
     getAudioTFProbability: {
@@ -606,6 +691,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Audio TF Wahrscheinlichkeit',
         fr: 'probabilité TF audio',
         es: 'probabilidad de audio TF',
+        'pt-br': 'Probabilidade do áudio TF',
         ko: '오디오 TF 확률'
     },
     loadAudioTM: {
@@ -613,6 +699,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'lade Audio Modell (Teachable Machine) von [URL]',
         fr: 'charger le modèle audio (Teachable Machine) depuis [URL]',
         es: 'cargar modelo de audio (Teachable Machine) desde [URL]',
+        'pt-br': 'Carregar modelo de áudio (Teachable Machine) de [URL]',
         ko: '오디오 모델 로드 (Teachable Machine) [URL]에서'
     },
     classifyAudioTM: {
@@ -620,6 +707,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'erkenne Ton via TM (Mikrofon)',
         fr: 'classer le son via TM (microphone)',
         es: 'clasificar sonido vía TM (micrófono)',
+        'pt-br': 'Classificar som via TM (microfone)',
         ko: 'TM를 통해 사운드 분류 (마이크)'
     },
     startAudioTM: {
@@ -627,6 +715,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'starte Audio Erkennung via TM',
         fr: 'démarrer la reconnaissance audio via TM',
         es: 'iniciar reconocimiento de audio vía TM',
+        'pt-br': 'Iniciar reconhecimento de áudio via TM',
         ko: 'TM를 통해 오디오 인식 시작'
     },
     stopAudioTM: {
@@ -634,6 +723,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'stoppe Audio Erkennung via TM',
         fr: 'arrêter la reconnaissance audio via TM',
         es: 'detener el reconocimiento de audio vía TM',
+        'pt-br': 'Parar reconhecimento de áudio via TM',
         ko: 'TM를 통해 오디오 인식 중지'
     },
     getAudioTM: {
@@ -641,6 +731,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'letzte Audio Erkennung via TM',
         fr: 'dernière reconnaissance audio via TM',
         es: 'último reconocimiento de audio vía TM',
+        'pt-br': 'Último reconhecimento de áudio via TM',
         ko: 'TM를 통해 마지막 오디오 인식'
     },
     getAudioTMClass: {
@@ -648,6 +739,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Audio TM Klasse',
         fr: 'classe TM audio',
         es: 'clase de audio TM',
+        'pt-br': 'Classe do áudio TM',
         ko: '오디오 TM 클래스'
     },
     getAudioTMProbability: {
@@ -655,6 +747,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Audio TM Wahrscheinlichkeit',
         fr: 'probabilité TM audio',
         es: 'probabilidad de audio TM',
+        'pt-br': 'Probabilidade do áudio TM',
         ko: '오디오 TM 확률'
     },
     isAudioAbove: {
@@ -662,6 +755,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Audiopegel über [THRESHOLD] %?',
         fr: 'Le niveau audio est-il supérieur à [THRESHOLD] % ?',
         es: '¿El nivel de audio está por encima de [THRESHOLD] %?',
+        'pt-br': 'O nível de áudio está acima de [THRESHOLD] %?',
         ko: '오디오 레벨이 [THRESHOLD] % 이상입니까?'
     },
     loadPoseTF: {
@@ -669,6 +763,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'lade Pose Modell (TensorFlow)',
         fr: 'charger le modèle de pose (TensorFlow)',
         es: 'cargar modelo de pose (TensorFlow)',
+        'pt-br': 'Carregar modelo de pose (TensorFlow)',
         ko: '포즈 모델 로드 (TensorFlow)'
     },
     startPoseTF: {
@@ -676,6 +771,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'starte Pose Erkennung (Kamera) via TF',
         fr: 'démarrer la reconnaissance de pose (caméra) via TF',
         es: 'iniciar reconocimiento de pose (cámara) vía TF',
+        'pt-br': 'Iniciar reconhecimento de pose (câmera) via TF',
         ko: 'TF를 통해 포즈 인식 시작 (카메라)'
     },
     stopPoseTF: {
@@ -683,13 +779,15 @@ const message = { // translations en/de/fr/es/ko
         de: 'stoppe Pose Erkennung via TF',
         fr: 'arrêter la reconnaissance de pose via TF',
         es: 'detener el reconocimiento de pose vía TF',
+        'pt-br': 'Parar reconhecimento de pose via TF',
         ko: 'TF를 통해 포즈 인식 중지'
     },
     getPoseTF: {
         en: 'pose TF amount of keypoints',
         de: 'Pose TF Anzahl Keypoints',
         fr: 'pose TF nombre de points clés',
-        es: 'pose TF cantidad de puntos clave',
+        es: 'pose TF número de puntos clave',
+        'pt-br': 'Quantidade de pontos-chave da pose TF',
         ko: '포즈 TF 키포인트 수'
     },
     setPoseTFMinScore: {
@@ -697,13 +795,15 @@ const message = { // translations en/de/fr/es/ko
         de: 'setze Pose TF Mindest-Score auf [SCORE]',
         fr: 'définir le score minimum de pose TF à [SCORE]',
         es: 'establecer puntuación mínima de pose TF a [SCORE]',
+        'pt-br': 'Definir pontuação mínima da pose TF como [SCORE]',
         ko: '포즈 TF 최소 점수를 [SCORE](으)로 설정'
     },
     poseTFKeypointsCount: {
         en: 'pose TF amount of keypoints (filtered)',
         de: 'Pose TF Anzahl Keypoints (gefiltert)',
         fr: 'pose TF nombre de points clés (filtré)',
-        es: 'pose TF cantidad de puntos clave (filtrado)',
+        es: 'pose TF número de puntos clave (filtrado)',
+        'pt-br': 'Quantidade de pontos-chave da pose TF (filtrados)',
         ko: '포즈 TF 키포인트 수 (필터링됨)'
     },
     poseTFKeypointX: {
@@ -711,6 +811,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Pose TF X von [NAME]',
         fr: 'pose TF X de [NAME]',
         es: 'pose TF X de [NAME]',
+        'pt-br': 'X da pose TF de [NAME]',
         ko: '포즈 TF [NAME]의 X'
     },
     poseTFKeypointY: {
@@ -718,6 +819,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Pose TF Y von [NAME]',
         fr: 'pose TF Y de [NAME]',
         es: 'pose TF Y de [NAME]',
+        'pt-br': 'Y da pose TF de [NAME]',
         ko: '포즈 TF [NAME]의 Y'
     },
     poseTFKeypointScore: {
@@ -725,6 +827,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Pose TF Score von [NAME]',
         fr: 'pose TF Score de [NAME]',
         es: 'pose TF Score de [NAME]',
+        'pt-br': 'Pontuação da pose TF de [NAME]',
         ko: '포즈 TF [NAME]의 점수'
     },
     poseTFHasKeypoint: {
@@ -732,6 +835,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Pose TF hat Keypoint [NAME]?',
         fr: 'la pose TF a-t-elle le point clé [NAME] ?',
         es: '¿la pose TF tiene el punto clave [NAME]?',
+        'pt-br': 'A pose TF tem o ponto-chave [NAME]?',
         ko: '포즈 TF에 키포인트 [NAME]이(가) 있습니까?'
     },
     getPoseTFRaw: {
@@ -739,6 +843,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Pose TF Rohdaten (JSON)',
         fr: 'pose TF données brutes (JSON)',
         es: 'pose TF datos sin procesar (JSON)',
+        'pt-br': 'Dados brutos da pose TF (JSON)',
         ko: '포즈 TF 원시 데이터 (JSON)'
     },
     loadPoseTM: {
@@ -746,6 +851,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'lade Pose Modell (Teachable Machine) von [URL]',
         fr: 'charger le modèle de pose (Teachable Machine) depuis [URL]',
         es: 'cargar modelo de pose (Teachable Machine) desde [URL]',
+        'pt-br': 'Carregar modelo de pose (Teachable Machine) de [URL]',
         ko: '포즈 모델 로드 (Teachable Machine) [URL]에서'
     },
     startPoseTM: {
@@ -753,6 +859,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'starte Pose Erkennung via TM (Kamera)',
         fr: 'démarrer la reconnaissance de pose (caméra) via TM',
         es: 'iniciar reconocimiento de pose (cámara) vía TM',
+        'pt-br': 'Iniciar reconhecimento de pose (câmera) via TM',
         ko: 'TM를 통해 포즈 인식 시작 (카메라)'
     },
     stopPoseTM: {
@@ -760,6 +867,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'stoppe Pose Erkennung via TM',
         fr: 'arrêter la reconnaissance de pose via TM',
         es: 'detener el reconocimiento de pose vía TM',
+        'pt-br': 'Parar reconhecimento de pose via TM',
         ko: 'TM를 통해 포즈 인식 중지'
     },
     getPoseTM: {
@@ -767,6 +875,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'letzte Pose Daten via TM',
         fr: 'dernières données de pose via TM',
         es: 'últimos datos de pose vía TM',
+        'pt-br': 'Últimos dados de pose via TM',
         ko: 'TM를 통해 마지막 포즈 데이터'
     },
     getPoseTMClass: {
@@ -774,6 +883,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Pose TM Klasse',
         fr: 'classe TM de pose',
         es: 'clase de pose TM',
+        'pt-br': 'Classe da pose TM',
         ko: '포즈 TM 클래스'
     },
     getPoseTMProbability: {
@@ -781,6 +891,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Pose TM Wahrscheinlichkeit',
         fr: 'probabilité TM de pose',
         es: 'probabilidad de pose TM',
+        'pt-br': 'Probabilidade da pose TM',
         ko: '포즈 TM 확률'
     },
 
@@ -790,6 +901,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Willst du dich über USB oder BT verbinden?',
         fr: 'Voulez-vous vous connecter via USB ou BT ?',
         es: '¿Quieres conectarte por USB o BT?',
+        'pt-br': 'Você quer se conectar via USB ou BT?',
         ko: 'USB 또는 BT로 연결하시겠습니까?'
     },
     connectwlan: {
@@ -797,6 +909,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Willst du dich über USB oder WLAN verbinden?',
         fr: 'Voulez-vous vous connecter via USB ou WLAN ?',
         es: '¿Quieres conectarte por USB o WLAN?',
+        'pt-br': 'Você quer se conectar via USB ou WLAN?',
         ko: 'USB 또는 WLAN으로 연결하시겠습니까?'
     },
     cancel: {
@@ -804,6 +917,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Abbrechen',
         fr: 'Annuler',
         es: 'Cancelar',
+        'pt-br': 'Cancelar',
         ko: '취소'
     },
     connected: {
@@ -811,6 +925,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Der Controller ist verbunden',
         fr: 'Le contrôleur est connecté',
         es: 'El controlador está conectado',
+        'pt-br': 'O controlador está conectado',
         ko: '컨트롤러가 연결되었습니다.'
     },
     start: {
@@ -818,6 +933,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Du kannst nun starten',
         fr: 'Vous pouvez commencer maintenant',
         es: 'Ahora puedes empezar',
+        'pt-br': 'Você pode começar agora',
         ko: '이제 시작할 수 있습니다.'
     },
     disconnected: {
@@ -825,6 +941,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Der Controller ist getrennt',
         fr: 'Le contrôleur est déconnecté',
         es: 'El controlador está desconectado',
+        'pt-br': 'O controlador está desconectado',
         ko: '컨트롤러가 연결 해제되었습니다.'
     },
     reconnect: {
@@ -832,6 +949,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Versuche, die Verbindung erneut herzustellen, indem du auf die Schaltfläche „Verbinden“ in der rechten oberen Ecke klickst',
         fr: 'Essayez de vous reconnecter en cliquant sur le bouton de connexion dans le coin supérieur droit',
         es: 'Intenta reconectar haciendo clic en el botón de conectar en la esquina superior derecha',
+        'pt-br': 'Tente se reconectar clicando no botão de conexão no canto superior direito',
         ko: '오른쪽 상단의 연결 버튼을 클릭하여 다시 연결해 보세요.'
     },
     range: {
@@ -839,6 +957,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Ausgangswerte reichen von 0 bis 8',
         fr: 'Les valeurs de sortie vont de 0 à 8',
         es: 'Los valores de salida van de 0 a 8',
+        'pt-br': 'Os valores de saída variam de 0 a 8',
         ko: '출력 값은 0에서 8까지입니다.'
     },
     maximum: {
@@ -846,6 +965,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'denke daran, dass der maximale Ausgangswert 8 ist',
         fr: 'gardez à l’esprit que la valeur de sortie maximale est de 8',
         es: 'ten en cuenta que el valor máximo de salida es 8',
+        'pt-br': 'Lembre-se de que o valor máximo de saída é 8',
         ko: '최대 출력 값은 8임을 기억하세요.'
     },
     driver: {
@@ -853,6 +973,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Der Treiber ist nicht installiert',
         fr: 'Le pilote n’est pas installé',
         es: 'El controlador no está instalado',
+        'pt-br': 'O driver não está instalado',
         ko: '드라이버가 설치되어 있지 않습니다.'
     },
     install: {
@@ -860,6 +981,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Bitte installiere zuerst den Treiber',
         fr: 'Veuillez d’abord installer le pilote',
         es: 'Por favor, instala primero el controlador',
+        'pt-br': 'Instale o driver primeiro',
         ko: '먼저 드라이버를 설치하세요.'
     },
     connectbutton: {
@@ -867,6 +989,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Verbinden',
         fr: 'Connecter',
         es: 'Conectar',
+        'pt-br': 'Conectar',
         ko: '연결'
     },
     downloadbutton: {
@@ -874,6 +997,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Herunterladen',
         fr: 'Télécharger',
         es: 'Descargar',
+        'pt-br': 'Baixar',
         ko: '다운로드'
     },
     usbnotsupport: {
@@ -881,6 +1005,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Das Gerät wird nicht per USB unterstützt, da dieses keinen USB Anschluss hat.',
         fr: 'L’appareil n’est pas pris en charge via USB car il n’a pas de port USB.',
         es: 'El dispositivo no es compatible por USB porque no tiene un puerto USB.',
+        'pt-br': 'O dispositivo não é compatível com USB porque não possui uma porta USB.',
         ko: '이 장치는 USB 포트가 없어 USB로 지원되지 않습니다.'
     },
     btnotsupport: {
@@ -888,6 +1013,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Das Gerät wird nicht per Bluetooth unterstützt, da dieses kein Bluetooth Modul hat.',
         fr: 'L’appareil n’est pas pris en charge via Bluetooth car il n’a pas de module Bluetooth.',
         es: 'El dispositivo no es compatible por Bluetooth porque no tiene un módulo Bluetooth.',
+        'pt-br': 'O dispositivo não é compatível com Bluetooth porque não possui um módulo Bluetooth.',
         ko: '이 장치는 블루투스 모듈이 없어 블루투스로 지원되지 않습니다.'
     },
     apikeytxt: {
@@ -895,6 +1021,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Gebe hier den API-Schlüssel ein:',
         fr: 'Entrez la clé API ici :',
         es: 'Introduce aquí la clave API:',
+        'pt-br': 'Digite a chave da API aqui:',
         ko: '여기에 API 키를 입력하세요:'
     },
     apikey: {
@@ -902,6 +1029,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'API-Schlüssel',
         fr: 'Clé API',
         es: 'Clave API',
+        'pt-br': 'chave da API',
         ko: 'API 키'
     },
     ftduinoflash: {
@@ -909,6 +1037,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Lade WebUSB Scratch oder Datei hoch',
         fr: 'Téléchargement de WebUSB Scratch ou du fichier',
         es: 'Subiendo WebUSB Scratch o archivo',
+        'pt-br': 'Enviando WebUSB Scratch ou arquivo',
         ko: 'WebUSB Scratch 또는 파일 업로드 중'
     },
     ftduinoupload: {
@@ -916,6 +1045,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Datei hochladen',
         fr: 'Télécharger le fichier',
         es: 'Subir archivo',
+        'pt-br': 'Enviar arquivo',
         ko: '파일 업로드'
     },
     notsupported: {
@@ -923,6 +1053,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Das Gerät wird zurzeit nicht unterstützt!\n Bitte benutze den Download-Button.\n Lade davor die Scratch Datei herunter.',
         fr: 'L’appareil n’est actuellement pas pris en charge !\n Veuillez utiliser le bouton de téléchargement.\n Téléchargez d’abord le fichier Scratch.',
         es: '¡El dispositivo no es compatible actualmente!\n Por favor, usa el botón de descarga.\n Descarga antes el archivo de Scratch.',
+        'pt-br': 'O dispositivo não é compatível no momento!\n Use o botão de download.\n Baixe o arquivo do Scratch antes.',
         ko: '이 장치는 현재 지원되지 않습니다!\n 다운로드 버튼을 사용하세요.\n 먼저 Scratch 파일을 다운로드하세요.'
     },
     downloadtxt: {
@@ -930,6 +1061,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Lade jetzt die convert Datei auf den TXT via http://192.168.7.2/#txt/Scratch (TXT über USB verbunden).\n Falls die Seite nicht läd -> aktiverie auf dem TXT den WEB Server und den VNC Server.\n',
         fr: 'Maintenant, téléchargez le fichier converti sur le TXT via http://192.168.7.2/#txt/Scratch (TXT connecté via USB).\n Si la page ne se charge pas, activez le serveur WEB et le serveur VNC sur le TXT.\n',
         es: 'Ahora sube el archivo convertido al TXT vía http://192.168.7.2/#txt/Scratch (TXT conectado por USB).\n Si la página no carga, activa el servidor WEB y el servidor VNC en el TXT.\n',
+        'pt-br': 'Agora envie o arquivo convertido para o TXT via http://192.168.7.2/#txt/Scratch (TXT conectado via USB).\n Se a página não carregar, ative o servidor WEB e o servidor VNC no TXT.\n',
         ko: '이제 변환된 파일을 http://192.168.7.2/#txt/Scratch (USB로 연결된 TXT)로 업로드하세요.\n 페이지가 로드되지 않으면 TXT에서 WEB 서버와 VNC 서버를 활성화하세요.\n'
     },
     downloadftduino: {
@@ -937,6 +1069,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Derzeit nicht unterstützt.',
         fr: 'Actuellement non pris en charge.',
         es: 'Actualmente no compatible.',
+        'pt-br': 'Atualmente não compatível.',
         ko: '현재 지원되지 않습니다.'
     },
     downloadtx: {
@@ -944,6 +1077,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Derzeit nicht unterstützt.',
         fr: 'Actuellement non pris en charge.',
         es: 'Actualmente no compatible.',
+        'pt-br': 'Atualmente não compatível.',
         ko: '현재 지원되지 않습니다.'
     },
     downloadrx: {
@@ -951,6 +1085,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Derzeit nicht unterstützt.',
         fr: 'Actuellement non pris en charge.',
         es: 'Actualmente no compatible.',
+        'pt-br': 'Atualmente não compatível.',
         ko: '현재 지원되지 않습니다.'
     },
     downloadtxt40: {
@@ -958,6 +1093,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Derzeit nicht unterstützt.',
         fr: 'Actuellement non pris en charge.',
         es: 'Actualmente no compatible.',
+        'pt-br': 'Atualmente não compatível.',
         ko: '현재 지원되지 않습니다.'
     },
     browsernotwebbt: {
@@ -965,6 +1101,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Dein Browser unterstützt kein Web Bluetooth.\nBitte benutze einen anderen Browser wie Chrome oder Edge.',
         fr: 'Votre navigateur ne prend pas en charge Web Bluetooth.\nVeuillez utiliser un autre navigateur comme Chrome ou Edge.',
         es: 'Tu navegador no soporta Web Bluetooth.\nPor favor, usa otro navegador como Chrome o Edge.',
+        'pt-br': 'Seu navegador não oferece suporte ao Web Bluetooth.\nUse outro navegador, como Chrome ou Edge.',
         ko: '브라우저가 Web Bluetooth를 지원하지 않습니다.\nChrome 또는 Edge와 같은 다른 브라우저를 사용하세요.'
     },
     browsernotwebusb: {
@@ -972,6 +1109,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Dein Browser unterstützt kein Web USB.\nBitte benutze einen anderen Browser wie Chrome oder Edge.',
         fr: 'Votre navigateur ne prend pas en charge Web USB.\nVeuillez utiliser un autre navigateur comme Chrome ou Edge.',
         es: 'Tu navegador no soporta Web USB.\nPor favor, usa otro navegador como Chrome o Edge.',
+        'pt-br': 'Seu navegador não oferece suporte ao Web USB.\nUse outro navegador, como Chrome ou Edge.',
         ko: '브라우저가 Web USB를 지원하지 않습니다.\nChrome 또는 Edge와 같은 다른 브라우저를 사용하세요.'
     },
     browsernotwebserial: {
@@ -979,6 +1117,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Dein Browser unterstützt kein Web Serial.\nBitte benutze einen anderen Browser wie Chrome oder Edge.',
         fr: 'Votre navigateur ne prend pas en charge Web Serial.\nVeuillez utiliser un autre navigateur comme Chrome ou Edge.',
         es: 'Tu navegador no soporta Web Serial.\nPor favor, usa otro navegador como Chrome o Edge.',
+        'pt-br': 'Seu navegador não oferece suporte ao Web Serial.\nUse outro navegador, como Chrome ou Edge.',
         ko: '브라우저가 Web Serial을 지원하지 않습니다.\nChrome 또는 Edge와 같은 다른 브라우저를 사용하세요.'
     },
     mobilewebserial: {
@@ -986,6 +1125,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Web Serial wird auf mobilen Geräten nicht unterstützt.\nBitte benutze einen Desktop-Browser.',
         fr: 'Web Serial n’est pas pris en charge sur les appareils mobiles.\nVeuillez utiliser un navigateur de bureau.',
         es: 'Web Serial no es compatible en dispositivos móviles.\nPor favor, usa un navegador de escritorio.',
+        'pt-br': 'O Web Serial não é compatível com dispositivos móveis.\nUse um navegador para computador.',
         ko: '모바일 기기에서는 Web Serial이 지원되지 않습니다.\n데스크톱 브라우저를 사용하세요.'
     },
     tryagain: {
@@ -993,6 +1133,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Der Controller ist noch nicht richtig verbunden.\nBitte versuche es erneut.',
         fr: 'Le contrôleur n’est pas encore correctement connecté.\nVeuillez réessayer.',
         es: 'El controlador aún no está correctamente conectado.\nPor favor, inténtalo de nuevo.',
+        'pt-br': 'O controlador ainda não está conectado corretamente.\nTente novamente.',
         ko: '컨트롤러가 아직 제대로 연결되지 않았습니다.\n다시 시도해 주세요.'
     },
     noble: {
@@ -1000,6 +1141,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Kein Zugriff auf Bluetooth-Geräte. Bitte stelle sicher, dass Bluetooth aktiviert ist und erlaube den Zugriff auf Bluetooth-Geräte.',
         fr: 'Pas d’accès aux appareils Bluetooth. Veuillez vous assurer que le Bluetooth est activé et autoriser l’accès aux appareils Bluetooth.',
         es: 'No hay acceso a dispositivos Bluetooth. Asegúrate de que el Bluetooth esté habilitado y permite el acceso a los dispositivos Bluetooth.',
+        'pt-br': 'Não há acesso aos dispositivos Bluetooth. Certifique-se de que o Bluetooth esteja ativado e permita o acesso aos dispositivos Bluetooth.',
         ko: 'Bluetooth 장치에 대한 액세스가 없습니다. Bluetooth가 활성화되어 있고 Bluetooth 장치에 대한 액세스가 허용되었는지 확인하세요.'
     },
     linuxwebbt: {
@@ -1007,6 +1149,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Unter Linux wird Web Bluetooth nur mit aktivierten experimentellen Funktionen unterstützt.\nBitte aktiviere: chrome://flags/#enable-experimental-web-platform-features',
         fr: 'Sous Linux, Web Bluetooth n’est pris en charge qu’avec les fonctionnalités expérimentales activées.\nVeuillez activer : chrome://flags/#enable-experimental-web-platform-features',
         es: 'En Linux, Web Bluetooth solo es compatible con funciones experimentales habilitadas.\nPor favor, habilita: chrome://flags/#enable-experimental-web-platform-features',
+        'pt-br': 'No Linux, o Web Bluetooth só é compatível com os recursos experimentais ativados.\nAtive: chrome://flags/#enable-experimental-web-platform-features',
         ko: 'Linux에서는 실험적 기능이 활성화된 경우에만 Web Bluetooth가 지원됩니다.\n다음 항목을 활성화하세요: chrome://flags/#enable-experimental-web-platform-features'
     },
     linuxserial: {
@@ -1014,6 +1157,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Unter Linux wird Web Serial nur mit bestimmten Gruppen ermöglicht. \nFolge den Anweisungen auf der Website.',
         fr: 'Sous Linux, Web Serial n’est activé qu’avec des groupes spécifiques.\nVeuillez suivre les instructions sur le site Web.',
         es: 'En Linux, Web Serial solo está habilitado con grupos específicos.\nPor favor, sigue las instrucciones en el sitio web.',
+        'pt-br': 'No Linux, o Web Serial só é habilitado com grupos específicos. \nSiga as instruções no site.',
         ko: 'Linux에서는 특정 그룹에서만 Web Serial이 활성화됩니다.\n웹사이트의 지침을 따르세요.'
     },
 
@@ -1022,6 +1166,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Kamera konnte nicht gestartet werden. Bitte Berechtigungen prüfen.',
         fr: 'La caméra n’a pas pu démarrer. Veuillez vérifier les autorisations.',
         es: 'No se pudo iniciar la cámara. Por favor, verifica los permisos.',
+        'pt-br': 'Não foi possível iniciar a câmera. Verifique as permissões.',
         ko: '카메라를 시작할 수 없습니다. 권한을 확인하세요.'
     },
     picture_tf_model_loaded: {
@@ -1029,6 +1174,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Bild-TF Modell geladen!',
         fr: 'Modèle TF d’image chargé !',
         es: '¡Modelo de imagen TF cargado!',
+        'pt-br': 'Modelo de imagem TF carregado!',
         ko: '이미지 TF 모델이 로드되었습니다!'
     },
     picture_tf_model_not_loaded: {
@@ -1036,6 +1182,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Bild TF Modell nicht geladen!',
         fr: 'Modèle TF d’image non chargé !',
         es: '¡Modelo de imagen TF no cargado!',
+        'pt-br': 'Modelo de imagem TF não carregado!',
         ko: '이미지 TF 모델이 로드되지 않았습니다!'
     },
     picture_tf_recognition_started: {
@@ -1043,6 +1190,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Bild TF Erkennung gestartet!',
         fr: 'Reconnaissance d’image TF démarrée !',
         es: '¡Reconocimiento de imagen TF iniciado!',
+        'pt-br': 'Reconhecimento de imagem TF iniciado!',
         ko: '이미지 TF 인식이 시작되었습니다!'
     },
     picture_tf_recognition_stopped: {
@@ -1050,6 +1198,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Bild TF Erkennung gestoppt!',
         fr: 'Reconnaissance d’image TF arrêtée !',
         es: '¡Reconocimiento de imagen TF detenido!',
+        'pt-br': 'Reconhecimento de imagem TF interrompido!',
         ko: '이미지 TF 인식이 중지되었습니다!'
     },
     picture_tm_model_loaded: {
@@ -1057,6 +1206,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Bild-TM Modell geladen!',
         fr: 'Modèle TM d’image chargé !',
         es: '¡Modelo de imagen TM cargado!',
+        'pt-br': 'Modelo de imagem TM carregado!',
         ko: '이미지 TM 모델이 로드되었습니다!'
     },
     picture_tm_model_not_loaded: {
@@ -1064,6 +1214,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Bild TM Modell nicht geladen!',
         fr: 'Modèle TM d’image non chargé !',
         es: '¡Modelo de imagen TM no cargado!',
+        'pt-br': 'Modelo de imagem TM não carregado!',
         ko: '이미지 TM 모델이 로드되지 않았습니다!'
     },
     picture_tm_recognition_started: {
@@ -1071,6 +1222,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Bild TM Erkennung gestartet!',
         fr: 'Reconnaissance d’image TM démarrée !',
         es: '¡Reconocimiento de imagen TM iniciado!',
+        'pt-br': 'Reconhecimento de imagem TM iniciado!',
         ko: '이미지 TM 인식이 시작되었습니다!'
     },
     picture_tm_recognition_stopped: {
@@ -1078,6 +1230,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Bild TM Erkennung gestoppt!',
         fr: 'Reconnaissance d’image TM arrêtée !',
         es: '¡Reconocimiento de imagen TM detenido!',
+        'pt-br': 'Reconhecimento de imagem TM interrompido!',
         ko: '이미지 TM 인식이 중지되었습니다!'
     },
     audio_tf_model_loaded: {
@@ -1085,6 +1238,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Audio-TF Modell geladen!',
         fr: 'Modèle TF audio chargé !',
         es: '¡Modelo de audio TF cargado!',
+        'pt-br': 'Modelo de áudio TF carregado!',
         ko: '오디오 TF 모델이 로드되었습니다!'
     },
     audio_tf_model_not_loaded: {
@@ -1092,6 +1246,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Audio TF Modell nicht geladen!',
         fr: 'Modèle TF audio non chargé !',
         es: '¡Modelo de audio TF no cargado!',
+        'pt-br': 'Modelo de áudio TF não carregado!',
         ko: '오디오 TF 모델이 로드되지 않았습니다!'
     },
     audio_tf_already_running: {
@@ -1099,6 +1254,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Audio TF Erkennung läuft bereits!',
         fr: 'La reconnaissance audio TF est déjà en cours !',
         es: '¡El reconocimiento de audio TF ya está en funcionamiento!',
+        'pt-br': 'O reconhecimento de áudio TF já está em execução!',
         ko: '오디오 TF 인식이 이미 실행 중입니다!'
     },
     audio_tf_recognition_started: {
@@ -1106,6 +1262,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Audio TF Erkennung gestartet!',
         fr: 'Reconnaissance audio TF démarrée !',
         es: '¡Reconocimiento de audio TF iniciado!',
+        'pt-br': 'Reconhecimento de áudio TF iniciado!',
         ko: '오디오 TF 인식이 시작되었습니다!'
     },
     audio_tf_could_not_start: {
@@ -1113,6 +1270,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Audio TF Erkennung konnte nicht gestartet werden!',
         fr: 'La reconnaissance audio TF n’a pas pu démarrer !',
         es: '¡El reconocimiento de audio TF no pudo iniciarse!',
+        'pt-br': 'Não foi possível iniciar o reconhecimento de áudio TF!',
         ko: '오디오 TF 인식을 시작할 수 없습니다!'
     },
     audio_tf_recognition_stopped: {
@@ -1120,6 +1278,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Audio TF Erkennung gestoppt!',
         fr: 'Reconnaissance audio TF arrêtée !',
         es: '¡Reconocimiento de audio TF detenido!',
+        'pt-br': 'Reconhecimento de áudio TF interrompido!',
         ko: '오디오 TF 인식이 중지되었습니다!'
     },
     audio_tm_model_loaded: {
@@ -1127,6 +1286,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Audio-TM Modell geladen!',
         fr: 'Modèle TM audio chargé !',
         es: '¡Modelo de audio TM cargado!',
+        'pt-br': 'Modelo de áudio TM carregado!',
         ko: '오디오 TM 모델이 로드되었습니다!'
     },
     audio_tm_model_not_loaded: {
@@ -1134,6 +1294,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Audio TM Modell nicht geladen!',
         fr: 'Modèle TM audio non chargé !',
         es: '¡Modelo de audio TM no cargado!',
+        'pt-br': 'Modelo de áudio TM não carregado!',
         ko: '오디오 TM 모델이 로드되지 않았습니다!'
     },
     audio_tm_already_running: {
@@ -1141,6 +1302,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Audio TM Erkennung läuft bereits!',
         fr: 'La reconnaissance audio TM est déjà en cours !',
         es: '¡El reconocimiento de audio TM ya está en funcionamiento!',
+        'pt-br': 'O reconhecimento de áudio TM já está em execução!',
         ko: '오디오 TM 인식이 이미 실행 중입니다!'
     },
     audio_tm_recognition_started: {
@@ -1148,6 +1310,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Audio TM Erkennung gestartet!',
         fr: 'Reconnaissance audio TM démarrée !',
         es: '¡Reconocimiento de audio TM iniciado!',
+        'pt-br': 'Reconhecimento de áudio TM iniciado!',
         ko: '오디오 TM 인식이 시작되었습니다!'
     },
     audio_tm_recognition_failed: {
@@ -1155,6 +1318,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Audio TM Erkennung konnte nicht gestartet werden!',
         fr: 'La reconnaissance audio TM n’a pas pu démarrer !',
         es: '¡El reconocimiento de audio TM no pudo iniciarse!',
+        'pt-br': 'Não foi possível iniciar o reconhecimento de áudio TM!',
         ko: '오디오 TM 인식을 시작할 수 없습니다!'
     },
     audio_tm_recognition_stopped: {
@@ -1162,6 +1326,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Audio TM Erkennung gestoppt!',
         fr: 'Reconnaissance audio TM arrêtée !',
         es: '¡Reconocimiento de audio TM detenido!',
+        'pt-br': 'Reconhecimento de áudio TM interrompido!',
         ko: '오디오 TM 인식이 중지되었습니다!'
     },
     microphone_permission_check: {
@@ -1169,6 +1334,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Mikrofon konnte nicht gestartet werden. Bitte Berechtigungen prüfen.',
         fr: 'Le microphone n’a pas pu démarrer. Veuillez vérifier les autorisations.',
         es: 'No se pudo iniciar el micrófono. Por favor, verifica los permisos.',
+        'pt-br': 'Não foi possível iniciar o microfone. Verifique as permissões.',
         ko: '마이크를 시작할 수 없습니다. 권한을 확인하세요.'
     },
     pose_tf_model_loaded: {
@@ -1176,6 +1342,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Pose-TF Modell geladen!',
         fr: 'Modèle TF de pose chargé !',
         es: '¡Modelo de pose TF cargado!',
+        'pt-br': 'Modelo de pose TF carregado!',
         ko: '포즈 TF 모델이 로드되었습니다!'
     },
     pose_tf_model_not_loaded: {
@@ -1183,6 +1350,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Pose TF Modell nicht geladen!',
         fr: 'Modèle TF de pose non chargé !',
         es: '¡Modelo de pose TF no cargado!',
+        'pt-br': 'Modelo de pose TF não carregado!',
         ko: '포즈 TF 모델이 로드되지 않았습니다!'
     },
     pose_tf_recognition_started: {
@@ -1190,6 +1358,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Pose TF Erkennung gestartet!',
         fr: 'Reconnaissance de pose TF démarrée !',
         es: '¡Reconocimiento de pose TF iniciado!',
+        'pt-br': 'Reconhecimento de pose TF iniciado!',
         ko: '포즈 TF 인식이 시작되었습니다!'
     },
     pose_tf_recognition_stopped: {
@@ -1197,6 +1366,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Pose TF Erkennung gestoppt!',
         fr: 'Reconnaissance de pose TF arrêtée !',
         es: '¡Reconocimiento de pose TF detenido!',
+        'pt-br': 'Reconhecimento de pose TF interrompido!',
         ko: '포즈 TF 인식이 중지되었습니다!'
     },
     pose_tm_model_loaded: {
@@ -1204,6 +1374,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Pose-TM Modell geladen!',
         fr: 'Modèle TM de pose chargé !',
         es: '¡Modelo de pose TM cargado!',
+        'pt-br': 'Modelo de pose TM carregado!',
         ko: '포즈 TM 모델이 로드되었습니다!'
     },
     pose_tm_model_not_loaded: {
@@ -1211,6 +1382,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Pose TM Modell nicht geladen!',
         fr: 'Modèle TM de pose non chargé !',
         es: '¡Modelo de pose TM no cargado!',
+        'pt-br': 'Modelo de pose TM não carregado!',
         ko: '포즈 TM 모델이 로드되지 않았습니다!'
     },
     pose_tm_recognition_started: {
@@ -1218,6 +1390,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Pose TM Erkennung gestartet!',
         fr: 'Reconnaissance de pose TM démarrée !',
         es: '¡Reconocimiento de pose TM iniciado!',
+        'pt-br': 'Reconhecimento de pose TM iniciado!',
         ko: '포즈 TM 인식이 시작되었습니다!'
     },
     pose_tm_recognition_stopped: {
@@ -1225,6 +1398,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Pose TM Erkennung gestoppt!',
         fr: 'Reconnaissance de pose TM arrêtée !',
         es: '¡Reconocimiento de pose TM detenido!',
+        'pt-br': 'Reconhecimento de pose TM interrompido!',
         ko: '포즈 TM 인식이 중지되었습니다!'
     },
     model_not_loaded: {
@@ -1232,6 +1406,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Modell nicht geladen!',
         fr: 'Modèle non chargé !',
         es: '¡Modelo no cargado!',
+        'pt-br': 'Modelo não carregado!',
         ko: '모델이 로드되지 않았습니다!'
     },
     no_recognition: {
@@ -1239,6 +1414,7 @@ const message = { // translations en/de/fr/es/ko
         de: 'Keine Erkennung!',
         fr: 'Aucune reconnaissance !',
         es: '¡Sin reconocimiento!',
+        'pt-br': 'Nenhum reconhecimento!',
         ko: '인식 없음!'
     }
 };

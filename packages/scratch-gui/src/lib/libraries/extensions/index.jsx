@@ -46,6 +46,11 @@ import rxInsetIconURL from './ft/rx_small.png';
 import rxConnectionIconURL from './ft/rx_small.png';
 import rxConnectionSmallIconURL from './ft/rx_small.png';
 
+import ioextIconURL from './ft/ioext_big.png';
+import ioextInsetIconURL from './ft/ioext_small.png';
+import ioextConnectionIconURL from './ft/ioext_small.png';
+import ioextConnectionSmallIconURL from './ft/ioext_small.png';
+
 import tfIconURL from './tf/TensorFlow_big.png';
 import tfInsetIconURL from './tf/TensorFlow_small.svg';
 import tfConnectionIconURL from './tf/TensorFlow_small.svg';
@@ -366,6 +371,36 @@ export default [
                 defaultMessage="Connecting"
                 description="Message to help people connect to their fischertechnik."
                 id="gui.extension.rx.connectingMessage"
+            />
+        ),
+        helpLink: 'https://technika-karlsruhe.github.io/'
+    },
+    {
+        name: 'I/O-Extension',
+        extensionId: 'ioext',
+        collaborator: 'technika',
+        iconURL: ioextIconURL,
+        insetIconURL: ioextInsetIconURL,
+        description: (
+            <FormattedMessage
+                defaultMessage="Connect your projects with I/O-Extension."
+                description="Description for the 'I/O-Extension' extension"
+                id="gui.extension.ioext.description"
+            />
+        ),
+        featured: true,
+        disabled: false,
+        bluetoothRequired: false,
+        internetConnectionRequired: false,
+        launchPeripheralConnectionFlow: false,
+        useAutoScan: false,
+        connectionIconURL: ioextConnectionIconURL,
+        connectionSmallIconURL: ioextConnectionSmallIconURL,
+        connectingMessage: (
+            <FormattedMessage
+                defaultMessage="Connecting"
+                description="Message to help people connect to their fischertechnik."
+                id="gui.extension.ioext.connectingMessage"
             />
         ),
         helpLink: 'https://technika-karlsruhe.github.io/'

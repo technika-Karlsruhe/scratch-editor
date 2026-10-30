@@ -40,11 +40,11 @@ describe('Controls component', () => {
 
         test('when stop all button clicked triggers the right callback', () => {
             const props = defaultProps();
-            props.active = true;
             const {container} = renderWithIntl(<Controls {...props} />);
 
-            const stopAllButton = container.querySelector('img[title="Stop"]');
+            const stopAllButton = container.querySelector('button[aria-label="Stop project"]');
 
+            expect(stopAllButton).not.toBeDisabled();
             fireEvent.click(stopAllButton);
             expect(props.onStopAllClick).toHaveBeenCalled();
         });
