@@ -34,7 +34,7 @@ class LT{
          */
         this.runtime = runtime;
         translate.setup(); // setup translation
-        this.prevState = {byte1: 0x00, byte2: 0x00, byte3: 0x00};
+        this.prevState = {byte1: 0x00, byte2: 0x00, byte3: 0x00, byte4: 0x00};
     }
 
     configuration = 1;
@@ -354,38 +354,45 @@ class IOExt{
             throw new Error('I/O-Extension output index is outside the valid range.');
         }
 
-        let {byte1, byte2, byte3} = this.prevState;
-        const speedMagnitude = Math.round(Math.min(127, Math.abs(val)) / 127 * 15);
+        let {byte1, byte2, byte3, byte4} = this.prevState;
 
         if (ind < 4) { // M1-M4
-            const directionBits = [1 << (ind * 2), 1 << (ind * 2 + 1)];
-            const speedByte = ind < 2 ? byte2 : byte3;
-            const speedShift = (ind % 2) * 4;
-            const speedMask = 0x0F << speedShift;
-            const encodedSpeed = speedMagnitude << speedShift;
-            if (val > 0) {
-                byte1 = (byte1 | directionBits[1]) & ~directionBits[0];
-                if (ind < 2) byte2 = (speedByte & ~speedMask) | encodedSpeed;
-                else byte3 = (speedByte & ~speedMask) | encodedSpeed;
-            } else if (val < 0) {
-                byte1 = (byte1 | directionBits[0]) & ~directionBits[1];
-                if (ind < 2) byte2 = (speedByte & ~speedMask) | encodedSpeed;
-                else byte3 = (speedByte & ~speedMask) | encodedSpeed;
+            const motorValue = -val; // invert
+            const firstOutputIndex = ind * 2;
+            let speedBytes = byte2 | (byte3 << 8) | (byte4 << 16);
+            if (motorValue === 0) {
+                for (const outputIndex of [firstOutputIndex, firstOutputIndex + 1]) {
+                    byte1 &= ~(1 << outputIndex);
+                    speedBytes &= ~(0x07 << (outputIndex * 3));
+                }
             } else {
-                byte1 &= ~(directionBits[0] | directionBits[1]);
-                if (ind < 2) byte2 &= ~speedMask;
-                else byte3 &= ~speedMask;
+                const activeOutputIndex = motorValue > 0 ? firstOutputIndex + 1 : firstOutputIndex;
+                const inactiveOutputIndex = motorValue > 0 ? firstOutputIndex : firstOutputIndex + 1;
+                const activeSpeedShift = activeOutputIndex * 3;
+                const inactiveSpeedShift = inactiveOutputIndex * 3;
+                byte1 = (byte1 | (1 << activeOutputIndex)) & ~(1 << inactiveOutputIndex);
+                speedBytes = (speedBytes & ~(0x07 << activeSpeedShift) & ~(0x07 << inactiveSpeedShift)) |
+                    (Math.round(Math.min(127, Math.abs(motorValue)) / 127 * 7) << activeSpeedShift);
             }
+            byte2 = speedBytes & 0xFF;
+            byte3 = (speedBytes >> 8) & 0xFF;
+            byte4 = (speedBytes >> 16) & 0xFF;
         } else {
             const outputIndex = ind - 4;
-            const mask = 1 << (outputIndex % 8);
+            const outputSpeedMagnitude = Math.round(Math.min(127, Math.abs(val)) / 127 * 7);
+            const mask = 1 << outputIndex;
+            const speedShift = outputIndex * 3;
+            const speedMask = 0x07 << speedShift;
+            let speedBytes = byte2 | (byte3 << 8) | (byte4 << 16);
             byte1 = val > 0 ? byte1 | mask : byte1 & ~mask;
-            if (outputIndex % 4 < 2) byte2 = val > 0 ? speedMagnitude : 0;
-            else byte3 = val > 0 ? speedMagnitude : 0;
+            speedBytes = val > 0 ? (speedBytes & ~speedMask) | (outputSpeedMagnitude << speedShift) : speedBytes & ~speedMask;
+            byte2 = speedBytes & 0xFF;
+            byte3 = (speedBytes >> 8) & 0xFF;
+            byte4 = (speedBytes >> 16) & 0xFF;
         }
 
-        this.prevState = {byte1, byte2, byte3};
-        return new Uint8Array([0xF2, byte1, byte2, byte3, 0x00, 0x00]);
+        this.prevState = {byte1, byte2, byte3, byte4};
+        return new Uint8Array([0xF2, byte1, byte2, byte3, byte4, 0x00]);
     }
 
     getwriteInMode (ind, val){

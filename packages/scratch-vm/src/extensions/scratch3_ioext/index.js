@@ -86,12 +86,12 @@ class Scratch3IOExtBlocks {
 
             blocks: [ // the blocks are already defined in the block.js file and accessed like that:
                 b.getBlock_onOpenClose(),
-                //b.getBlock_onInput2(),
-                //b.getBlock_getSensor2(),
+                // b.getBlock_onInput2(),
+                // b.getBlock_getSensor2(),
                 b.getBlock_isClosed(),
                 b.getBlock_doSetLamp2(),
                 b.getBlock_doSetOutput2(),
-                //b.getBlock_doConfigureInput2(),
+                // b.getBlock_doConfigureInput2(),
                 b.getBlock_doSetMotorSpeed(),
                 b.getBlock_doSetMotorSpeedDir(),
                 b.getBlock_doSetMotorDir(),

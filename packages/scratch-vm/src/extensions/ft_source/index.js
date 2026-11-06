@@ -398,7 +398,7 @@ class Main {
             //   }
             // })   // delete for now
         }
-        this.versionNumber = '0.1.14';
+        this.versionNumber = '0.1.15';
     }
 
     ismobile (){
