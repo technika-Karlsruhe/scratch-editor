@@ -4,7 +4,7 @@ see: http://github.com/greggman/twgl.js for details */
 
 /*!
 
-JSZip v3.10.1 - A JavaScript class for generating and reading zip files
+JSZip v3.10.2 - A JavaScript class for generating and reading zip files
 <http://stuartk.com/jszip>
 
 (c) 2009-2016 Stuart Knightley <stuart [at] stuartk.com>
@@ -15,19 +15,38 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 */
 
 /*!
+         * The buffer module from node.js, for the browser.
+         *
+         * @author   Feross Aboukhadijeh <https://feross.org>
+         * @license  MIT
+         */
+
+/*!
  * The buffer module from node.js, for the browser.
  *
  * @author   Feross Aboukhadijeh <https://feross.org>
  * @license  MIT
  */
 
-/*! @license DOMPurify 3.3.1 | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/3.3.1/LICENSE */
+/*! @license DOMPurify 3.4.17 | (c) Cure53 and other contributors | Released under the Apache license 2.0 and Mozilla Public License 2.0 | github.com/cure53/DOMPurify/blob/3.4.17/LICENSE */
 
 /*! @source http://purl.eligrey.com/github/canvas-toBlob.js/blob/master/canvas-toBlob.js */
 
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
 
+/*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */
+
 /*! safe-buffer. MIT License. Feross Aboukhadijeh <https://feross.org/opensource> */
+
+/**
+                                           * [js-md5]{@link https://github.com/emn178/js-md5}
+                                           *
+                                           * @namespace md5
+                                           * @version 0.7.3
+                                           * @author Chen, Yi-Cyuan [emn178@gmail.com]
+                                           * @copyright Chen, Yi-Cyuan 2014-2017
+                                           * @license MIT
+                                           */
 
 /**
     * @license
